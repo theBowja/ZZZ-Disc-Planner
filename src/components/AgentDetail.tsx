@@ -28,8 +28,10 @@ export function AgentDetail({ agent }: AgentDetailProps) {
   const currentLoadout = agent.loadouts.find((l) => l.id === agent.currentLoadoutId)
 
   const handleDelete = () => {
-    deleteAgent(agent.id)
-    selectAgent(null)
+    if (window.confirm(`Are you sure you want to delete ${agent.name}? This action cannot be undone.`)) {
+      deleteAgent(agent.id)
+      selectAgent(null)
+    }
   }
 
   const handleAddLoadout = () => {
@@ -55,93 +57,101 @@ export function AgentDetail({ agent }: AgentDetailProps) {
               variant="destructive"
               size="sm"
             >
-              <X className="h-4 w-4" />
+              Delete Agent
             </Button>
           </div>
         </CardHeader>
-        <CardContent className="space-y-6">
-          {/* Agent full body image */}
-          {agent.bodyUrl ? (
-            <div className="aspect-[2/3] max-w-xs mx-auto bg-slate-800/50 border border-cyan-300/20 rounded-md overflow-hidden flex items-center justify-center">
-              <img
-                src={resolveAssetPath(agent.bodyUrl)}
-                alt={`${agent.name} full body`}
-                className="w-full h-full object-contain"
-                onError={(e) => {
-                  e.currentTarget.parentElement!.innerHTML = '<span class="text-xs text-cyan-300/30">Full Body Placeholder</span>'
-                }}
-              />
+        <CardContent>
+          <div className="flex flex-col md:flex-row gap-6">
+            {/* Left side: Agent image and Final Stats */}
+            <div className="flex-shrink-0 space-y-4">
+              {/* Agent full body image */}
+              {agent.bodyUrl ? (
+                <div className="aspect-[2/3] w-64 bg-slate-800/50 border border-cyan-300/20 rounded-md overflow-hidden flex items-center justify-center">
+                  <img
+                    src={resolveAssetPath(agent.bodyUrl)}
+                    alt={`${agent.name} full body`}
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                      e.currentTarget.parentElement!.innerHTML = '<span class="text-xs text-cyan-300/30">Full Body Placeholder</span>'
+                    }}
+                  />
+                </div>
+              ) : (
+                <div className="aspect-[2/3] w-64 bg-slate-800/50 border border-cyan-300/20 rounded-md flex items-center justify-center">
+                  <span className="text-xs text-cyan-300/30">Full Body Placeholder</span>
+                </div>
+              )}
+              
+              {/* Final Stats */}
+              <FinalStats stats={stats} />
             </div>
-          ) : (
-            <div className="aspect-[2/3] max-w-xs mx-auto bg-slate-800/50 border border-cyan-300/20 rounded-md flex items-center justify-center">
-              <span className="text-xs text-cyan-300/30">Full Body Placeholder</span>
-            </div>
-          )}
 
-          {/* Loadout Selector */}
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <label className="text-sm font-medium text-cyan-300">Loadout</label>
-              <Select
-                value={agent.currentLoadoutId || ''}
-                onValueChange={handleLoadoutChange}
-              >
-                <SelectTrigger className="w-48 border-cyan-300/20 bg-slate-800/50">
-                  <SelectValue placeholder="Select loadout" />
-                </SelectTrigger>
-                <SelectContent>
-                  {agent.loadouts.map((loadout) => (
-                    <SelectItem key={loadout.id} value={loadout.id}>
-                      {loadout.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Button
-                onClick={handleAddLoadout}
-                size="sm"
-                variant="outline"
-                className="border-cyan-300/20"
-              >
-                Add Loadout
-              </Button>
+            {/* Right side: Editable fields */}
+            <div className="flex-1 space-y-6">
+              {/* Loadout Selector */}
+              <div>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <label className="text-sm font-medium text-cyan-300">Loadout</label>
+                  <Select
+                    value={agent.currentLoadoutId || ''}
+                    onValueChange={handleLoadoutChange}
+                  >
+                    <SelectTrigger className="w-48 border-cyan-300/20 bg-slate-800/50">
+                      <SelectValue placeholder="Select loadout" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {agent.loadouts.map((loadout) => (
+                        <SelectItem key={loadout.id} value={loadout.id}>
+                          {loadout.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Button
+                    onClick={handleAddLoadout}
+                    size="sm"
+                    variant="outline"
+                    className="border-cyan-300/20"
+                  >
+                    Add Loadout
+                  </Button>
+                </div>
+              </div>
+
+              {/* W-Engine Section */}
+              <WEngineSection agent={agent} />
+
+              {/* Disc Drive Section */}
+              {currentLoadout && (
+                <Card className="bg-slate-800/50 border-cyan-300/20">
+                  <CardHeader>
+                    <CardTitle className="text-cyan-300 text-lg">Disc Drive</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-2 gap-4">
+                      {([1, 2, 3, 4, 5, 6] as const).map((slot) => (
+                        <DiscSlot
+                          key={slot}
+                          agent={agent}
+                          loadout={currentLoadout}
+                          slot={slot}
+                        />
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
             </div>
           </div>
         </CardContent>
       </Card>
-
-      {/* W-Engine Section */}
-      <WEngineSection agent={agent} />
-
-      {/* Disc Drive Section */}
-      {currentLoadout && (
-        <Card className="bg-slate-900/50 border-cyan-300/20">
-          <CardHeader>
-            <CardTitle className="text-cyan-300">Disc Drive</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {([1, 2, 3, 4, 5, 6] as const).map((slot) => (
-                <DiscSlot
-                  key={slot}
-                  agent={agent}
-                  loadout={currentLoadout}
-                  slot={slot}
-                />
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      )}
 
       {/* Buffs Section */}
       <BuffsSection agent={agent} allBuffs={allBuffs} />
 
       {/* Stat Weights */}
       <StatWeights />
-
-      {/* Final Stats */}
-      <FinalStats stats={stats} />
     </div>
   )
 }

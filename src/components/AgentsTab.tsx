@@ -16,7 +16,7 @@ export function AgentsTab() {
   const selectedAgent = agents.find((a) => a.id === selectedAgentId)
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
       <div className="lg:col-span-1">
         <Card className="bg-slate-900/50 border-cyan-400/30">
           <CardHeader>
@@ -62,9 +62,6 @@ export function AgentsTab() {
                       )}
                       <div className="flex-1 min-w-0">
                         <div className="font-medium text-cyan-300 truncate">{agent.name}</div>
-                        <div className="text-xs text-cyan-400/60 mt-1">
-                          {agent.loadouts.length} loadout{agent.loadouts.length !== 1 ? 's' : ''}
-                        </div>
                       </div>
                     </div>
                   </button>
@@ -75,7 +72,7 @@ export function AgentsTab() {
         </Card>
       </div>
 
-      <div className="lg:col-span-2">
+      <div className="lg:col-span-4">
         {selectedAgent ? (
           <AgentDetail agent={selectedAgent} />
         ) : (
