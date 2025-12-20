@@ -8,13 +8,7 @@
     "element": 203,
     "icon": "IconRole01",
     "iconUrl": "/images/agents/IconRoleCrop01.webp",
-    "bodyUrl": "/images/agents/IconRole01.webp",
-    "names": {
-      "EN": "Anby",
-      "KO": "엔비",
-      "CHS": "安比",
-      "JA": "アンビー"
-    }
+    "bodyUrl": "/images/agents/IconRole01.webp"
   },
   "1021": {
     "id": "1021",
@@ -25,13 +19,7 @@
     "element": 200,
     "icon": "IconRole11",
     "iconUrl": "/images/agents/IconRoleCrop11.webp",
-    "bodyUrl": "/images/agents/IconRole11.webp",
-    "names": {
-      "EN": "Nekomata",
-      "KO": "네코마타",
-      "CHS": "猫又",
-      "JA": "猫又"
-    }
+    "bodyUrl": "/images/agents/IconRole11.webp"
   },
   "1031": {
     "id": "1031",
@@ -42,13 +30,7 @@
     "element": 205,
     "icon": "IconRole12",
     "iconUrl": "/images/agents/IconRoleCrop12.webp",
-    "bodyUrl": "/images/agents/IconRole12.webp",
-    "names": {
-      "EN": "Nicole",
-      "KO": "니콜",
-      "CHS": "妮可",
-      "JA": "ニコ"
-    }
+    "bodyUrl": "/images/agents/IconRole12.webp"
   },
   "1041": {
     "id": "1041",
@@ -59,13 +41,7 @@
     "element": 201,
     "icon": "IconRole05",
     "iconUrl": "/images/agents/IconRoleCrop05.webp",
-    "bodyUrl": "/images/agents/IconRole05.webp",
-    "names": {
-      "EN": "Soldier 11",
-      "KO": "「11호」",
-      "CHS": "「11号」",
-      "JA": "「11号」"
-    }
+    "bodyUrl": "/images/agents/IconRole05.webp"
   },
   "1051": {
     "id": "1051",
@@ -76,13 +52,7 @@
     "element": 202,
     "icon": "IconRole52",
     "iconUrl": "/images/agents/IconRoleCrop52.webp",
-    "bodyUrl": "/images/agents/IconRole52.webp",
-    "names": {
-      "EN": "Yidhari",
-      "KO": "이드하리",
-      "CHS": "伊德海莉",
-      "JA": "イドリー"
-    }
+    "bodyUrl": "/images/agents/IconRole52.webp"
   },
   "1061": {
     "id": "1061",
@@ -93,13 +63,7 @@
     "element": 200,
     "icon": "IconRole09",
     "iconUrl": "/images/agents/IconRoleCrop09.webp",
-    "bodyUrl": "/images/agents/IconRole09.webp",
-    "names": {
-      "EN": "Corin",
-      "KO": "코린",
-      "CHS": "可琳",
-      "JA": "カリン"
-    }
+    "bodyUrl": "/images/agents/IconRole09.webp"
   },
   "1071": {
     "id": "1071",
@@ -110,13 +74,7 @@
     "element": 200,
     "icon": "IconRole25",
     "iconUrl": "/images/agents/IconRoleCrop25.webp",
-    "bodyUrl": "/images/agents/IconRole25.webp",
-    "names": {
-      "EN": "Caesar",
-      "KO": "카이사르",
-      "CHS": "凯撒",
-      "JA": "シーザー"
-    }
+    "bodyUrl": "/images/agents/IconRole25.webp"
   },
   "1081": {
     "id": "1081",
@@ -127,13 +85,7 @@
     "element": 200,
     "icon": "IconRole10",
     "iconUrl": "/images/agents/IconRoleCrop10.webp",
-    "bodyUrl": "/images/agents/IconRole10.webp",
-    "names": {
-      "EN": "Billy",
-      "KO": "빌리",
-      "CHS": "比利",
-      "JA": "ビリー"
-    }
+    "bodyUrl": "/images/agents/IconRole10.webp"
   },
   "1091": {
     "id": "1091",
@@ -144,13 +96,7 @@
     "element": 202,
     "icon": "IconRole13",
     "iconUrl": "/images/agents/IconRoleCrop13.webp",
-    "bodyUrl": "/images/agents/IconRole13.webp",
-    "names": {
-      "EN": "Miyabi",
-      "KO": "미야비",
-      "CHS": "雅",
-      "JA": "星見雅"
-    }
+    "bodyUrl": "/images/agents/IconRole13.webp"
   },
   "1101": {
     "id": "1101",
@@ -161,13 +107,7 @@
     "element": 201,
     "icon": "IconRole14",
     "iconUrl": "/images/agents/IconRoleCrop14.webp",
-    "bodyUrl": "/images/agents/IconRole14.webp",
-    "names": {
-      "EN": "Koleda",
-      "KO": "콜레다",
-      "CHS": "珂蕾妲",
-      "JA": "クレタ"
-    }
+    "bodyUrl": "/images/agents/IconRole14.webp"
   },
   "1111": {
     "id": "1111",
@@ -178,13 +118,7 @@
     "element": 203,
     "icon": "IconRole15",
     "iconUrl": "/images/agents/IconRoleCrop15.webp",
-    "bodyUrl": "/images/agents/IconRole15.webp",
-    "names": {
-      "EN": "Anton",
-      "KO": "앤톤",
-      "CHS": "安东",
-      "JA": "アンドー"
-    }
+    "bodyUrl": "/images/agents/IconRole15.webp"
   },
   "1121": {
     "id": "1121",
@@ -195,13 +129,7 @@
     "element": 201,
     "icon": "IconRole16",
     "iconUrl": "/images/agents/IconRoleCrop16.webp",
-    "bodyUrl": "/images/agents/IconRole16.webp",
-    "names": {
-      "EN": "Ben",
-      "KO": "벤",
-      "CHS": "本",
-      "JA": "ベン"
-    }
+    "bodyUrl": "/images/agents/IconRole16.webp"
   },
   "1131": {
     "id": "1131",
@@ -212,13 +140,7 @@
     "element": 202,
     "icon": "IconRole17",
     "iconUrl": "/images/agents/IconRoleCrop17.webp",
-    "bodyUrl": "/images/agents/IconRole17.webp",
-    "names": {
-      "EN": "Soukaku",
-      "KO": "소우카쿠",
-      "CHS": "苍角",
-      "JA": "蒼角"
-    }
+    "bodyUrl": "/images/agents/IconRole17.webp"
   },
   "1141": {
     "id": "1141",
@@ -229,13 +151,7 @@
     "element": 202,
     "icon": "IconRole18",
     "iconUrl": "/images/agents/IconRoleCrop18.webp",
-    "bodyUrl": "/images/agents/IconRole18.webp",
-    "names": {
-      "EN": "Lycaon",
-      "KO": "리카온",
-      "CHS": "莱卡恩",
-      "JA": "ライカン"
-    }
+    "bodyUrl": "/images/agents/IconRole18.webp"
   },
   "1151": {
     "id": "1151",
@@ -246,13 +162,7 @@
     "element": 201,
     "icon": "IconRole27",
     "iconUrl": "/images/agents/IconRoleCrop27.webp",
-    "bodyUrl": "/images/agents/IconRole27.webp",
-    "names": {
-      "EN": "Lucy",
-      "KO": "루시",
-      "CHS": "露西",
-      "JA": "ルーシー"
-    }
+    "bodyUrl": "/images/agents/IconRole27.webp"
   },
   "1161": {
     "id": "1161",
@@ -263,13 +173,7 @@
     "element": 201,
     "icon": "IconRole26",
     "iconUrl": "/images/agents/IconRoleCrop26.webp",
-    "bodyUrl": "/images/agents/IconRole26.webp",
-    "names": {
-      "EN": "Lighter",
-      "KO": "라이터",
-      "CHS": "莱特",
-      "JA": "ライト"
-    }
+    "bodyUrl": "/images/agents/IconRole26.webp"
   },
   "1171": {
     "id": "1171",
@@ -280,13 +184,7 @@
     "element": 201,
     "icon": "IconRole32",
     "iconUrl": "/images/agents/IconRoleCrop32.webp",
-    "bodyUrl": "/images/agents/IconRole32.webp",
-    "names": {
-      "EN": "Burnice",
-      "KO": "버니스",
-      "CHS": "柏妮思",
-      "JA": "バーニス"
-    }
+    "bodyUrl": "/images/agents/IconRole32.webp"
   },
   "1181": {
     "id": "1181",
@@ -297,13 +195,7 @@
     "element": 203,
     "icon": "IconRole20",
     "iconUrl": "/images/agents/IconRoleCrop20.webp",
-    "bodyUrl": "/images/agents/IconRole20.webp",
-    "names": {
-      "EN": "Grace",
-      "KO": "그레이스",
-      "CHS": "格莉丝",
-      "JA": "グレース"
-    }
+    "bodyUrl": "/images/agents/IconRole20.webp"
   },
   "1191": {
     "id": "1191",
@@ -314,13 +206,7 @@
     "element": 202,
     "icon": "IconRole21",
     "iconUrl": "/images/agents/IconRoleCrop21.webp",
-    "bodyUrl": "/images/agents/IconRole21.webp",
-    "names": {
-      "EN": "Ellen",
-      "KO": "엘렌",
-      "CHS": "艾莲",
-      "JA": "エレン"
-    }
+    "bodyUrl": "/images/agents/IconRole21.webp"
   },
   "1201": {
     "id": "1201",
@@ -331,13 +217,7 @@
     "element": 203,
     "icon": "IconRole35",
     "iconUrl": "/images/agents/IconRoleCrop35.webp",
-    "bodyUrl": "/images/agents/IconRole35.webp",
-    "names": {
-      "EN": "Harumasa",
-      "KO": "하루마사",
-      "CHS": "悠真",
-      "JA": "浅羽悠真"
-    }
+    "bodyUrl": "/images/agents/IconRole35.webp"
   },
   "1211": {
     "id": "1211",
@@ -348,13 +228,7 @@
     "element": 203,
     "icon": "IconRole22",
     "iconUrl": "/images/agents/IconRoleCrop22.webp",
-    "bodyUrl": "/images/agents/IconRole22.webp",
-    "names": {
-      "EN": "Rina",
-      "KO": "리나",
-      "CHS": "丽娜",
-      "JA": "リナ"
-    }
+    "bodyUrl": "/images/agents/IconRole22.webp"
   },
   "1221": {
     "id": "1221",
@@ -365,13 +239,7 @@
     "element": 203,
     "icon": "IconRole31",
     "iconUrl": "/images/agents/IconRoleCrop31.webp",
-    "bodyUrl": "/images/agents/IconRole31.webp",
-    "names": {
-      "EN": "Yanagi",
-      "KO": "야나기",
-      "CHS": "柳",
-      "JA": "月城柳"
-    }
+    "bodyUrl": "/images/agents/IconRole31.webp"
   },
   "1241": {
     "id": "1241",
@@ -382,13 +250,7 @@
     "element": 205,
     "icon": "IconRole23",
     "iconUrl": "/images/agents/IconRoleCrop23.webp",
-    "bodyUrl": "/images/agents/IconRole23.webp",
-    "names": {
-      "EN": "Zhu Yuan",
-      "KO": "주연",
-      "CHS": "朱鸢",
-      "JA": "朱鳶"
-    }
+    "bodyUrl": "/images/agents/IconRole23.webp"
   },
   "1251": {
     "id": "1251",
@@ -399,13 +261,7 @@
     "element": 203,
     "icon": "IconRole29",
     "iconUrl": "/images/agents/IconRoleCrop29.webp",
-    "bodyUrl": "/images/agents/IconRole29.webp",
-    "names": {
-      "EN": "Qingyi",
-      "KO": "청의",
-      "CHS": "青衣",
-      "JA": "青衣"
-    }
+    "bodyUrl": "/images/agents/IconRole29.webp"
   },
   "1261": {
     "id": "1261",
@@ -416,13 +272,7 @@
     "element": 200,
     "icon": "IconRole24",
     "iconUrl": "/images/agents/IconRoleCrop24.webp",
-    "bodyUrl": "/images/agents/IconRole24.webp",
-    "names": {
-      "EN": "Jane",
-      "KO": "제인",
-      "CHS": "简",
-      "JA": "ジェーン"
-    }
+    "bodyUrl": "/images/agents/IconRole24.webp"
   },
   "1271": {
     "id": "1271",
@@ -433,13 +283,7 @@
     "element": 203,
     "icon": "IconRole30",
     "iconUrl": "/images/agents/IconRoleCrop30.webp",
-    "bodyUrl": "/images/agents/IconRole30.webp",
-    "names": {
-      "EN": "Seth",
-      "KO": "세스",
-      "CHS": "赛斯",
-      "JA": "セス"
-    }
+    "bodyUrl": "/images/agents/IconRole30.webp"
   },
   "1281": {
     "id": "1281",
@@ -450,13 +294,7 @@
     "element": 200,
     "icon": "IconRole28",
     "iconUrl": "/images/agents/IconRoleCrop28.webp",
-    "bodyUrl": "/images/agents/IconRole28.webp",
-    "names": {
-      "EN": "Piper",
-      "KO": "파이퍼",
-      "CHS": "派派",
-      "JA": "パイパー"
-    }
+    "bodyUrl": "/images/agents/IconRole28.webp"
   },
   "1291": {
     "id": "1291",
@@ -467,13 +305,7 @@
     "element": 202,
     "icon": "IconRole42",
     "iconUrl": "/images/agents/IconRoleCrop42.webp",
-    "bodyUrl": "/images/agents/IconRole42.webp",
-    "names": {
-      "EN": "Hugo",
-      "KO": "휴고",
-      "CHS": "雨果",
-      "JA": "ヒューゴ"
-    }
+    "bodyUrl": "/images/agents/IconRole42.webp"
   },
   "1301": {
     "id": "1301",
@@ -484,13 +316,7 @@
     "element": 201,
     "icon": "IconRole49",
     "iconUrl": "/images/agents/IconRoleCrop49.webp",
-    "bodyUrl": "/images/agents/IconRole49.webp",
-    "names": {
-      "EN": "Orphie & Magus",
-      "KO": "오피 & 「도깨비불」",
-      "CHS": "奥菲丝&「鬼火」",
-      "JA": "オルペウス＆「鬼火」"
-    }
+    "bodyUrl": "/images/agents/IconRole49.webp"
   },
   "1311": {
     "id": "1311",
@@ -501,13 +327,7 @@
     "element": 205,
     "icon": "IconRole36",
     "iconUrl": "/images/agents/IconRoleCrop36.webp",
-    "bodyUrl": "/images/agents/IconRole36.webp",
-    "names": {
-      "EN": "Astra Yao",
-      "KO": "아스트라",
-      "CHS": "耀嘉音",
-      "JA": "アストラ"
-    }
+    "bodyUrl": "/images/agents/IconRole36.webp"
   },
   "1321": {
     "id": "1321",
@@ -518,13 +338,7 @@
     "element": 201,
     "icon": "IconRole37",
     "iconUrl": "/images/agents/IconRoleCrop37.webp",
-    "bodyUrl": "/images/agents/IconRole37.webp",
-    "names": {
-      "EN": "Evelyn",
-      "KO": "이블린",
-      "CHS": "伊芙琳",
-      "JA": "イヴリン"
-    }
+    "bodyUrl": "/images/agents/IconRole37.webp"
   },
   "1331": {
     "id": "1331",
@@ -535,13 +349,7 @@
     "element": 205,
     "icon": "IconRole41",
     "iconUrl": "/images/agents/IconRoleCrop41.webp",
-    "bodyUrl": "/images/agents/IconRole41.webp",
-    "names": {
-      "EN": "Vivian",
-      "KO": "비비안",
-      "CHS": "薇薇安",
-      "JA": "ビビアン"
-    }
+    "bodyUrl": "/images/agents/IconRole41.webp"
   },
   "1341": {
     "id": "1341",
@@ -552,13 +360,7 @@
     "element": 202,
     "icon": "IconRole56",
     "iconUrl": "/images/agents/IconRoleCrop56.webp",
-    "bodyUrl": "/images/agents/IconRole56.webp",
-    "names": {
-      "EN": "Zhao",
-      "KO": "자오",
-      "CHS": "照",
-      "JA": "照"
-    }
+    "bodyUrl": "/images/agents/IconRole56.webp"
   },
   "1351": {
     "id": "1351",
@@ -569,13 +371,7 @@
     "element": 200,
     "icon": "IconRole38",
     "iconUrl": "/images/agents/IconRoleCrop38.webp",
-    "bodyUrl": "/images/agents/IconRole38.webp",
-    "names": {
-      "EN": "Pulchra",
-      "KO": "펄크라",
-      "CHS": "波可娜",
-      "JA": "プルクラ"
-    }
+    "bodyUrl": "/images/agents/IconRole38.webp"
   },
   "1361": {
     "id": "1361",
@@ -586,13 +382,7 @@
     "element": 203,
     "icon": "IconRole39",
     "iconUrl": "/images/agents/IconRoleCrop39.webp",
-    "bodyUrl": "/images/agents/IconRole39.webp",
-    "names": {
-      "EN": "Trigger",
-      "KO": "「트리거」",
-      "CHS": "「扳机」",
-      "JA": "「トリガー」"
-    }
+    "bodyUrl": "/images/agents/IconRole39.webp"
   },
   "1371": {
     "id": "1371",
@@ -603,13 +393,7 @@
     "element": 205,
     "icon": "IconRole44",
     "iconUrl": "/images/agents/IconRoleCrop44.webp",
-    "bodyUrl": "/images/agents/IconRole44.webp",
-    "names": {
-      "EN": "Yixuan",
-      "KO": "의현",
-      "CHS": "仪玄",
-      "JA": "儀玄"
-    }
+    "bodyUrl": "/images/agents/IconRole44.webp"
   },
   "1381": {
     "id": "1381",
@@ -620,13 +404,7 @@
     "element": 203,
     "icon": "IconRole40",
     "iconUrl": "/images/agents/IconRoleCrop40.webp",
-    "bodyUrl": "/images/agents/IconRole40.webp",
-    "names": {
-      "EN": "Soldier 0 - Anby",
-      "KO": "0호·엔비",
-      "CHS": "零号·安比",
-      "JA": "0号・アンビー"
-    }
+    "bodyUrl": "/images/agents/IconRole40.webp"
   },
   "1391": {
     "id": "1391",
@@ -637,13 +415,7 @@
     "element": 201,
     "icon": "IconRole43",
     "iconUrl": "/images/agents/IconRoleCrop43.webp",
-    "bodyUrl": "/images/agents/IconRole43.webp",
-    "names": {
-      "EN": "Ju Fufu",
-      "KO": "귤복복",
-      "CHS": "橘福福",
-      "JA": "橘福福"
-    }
+    "bodyUrl": "/images/agents/IconRole43.webp"
   },
   "1401": {
     "id": "1401",
@@ -654,13 +426,7 @@
     "element": 200,
     "icon": "IconRole46",
     "iconUrl": "/images/agents/IconRoleCrop46.webp",
-    "bodyUrl": "/images/agents/IconRole46.webp",
-    "names": {
-      "EN": "Alice",
-      "KO": "앨리스",
-      "CHS": "爱丽丝",
-      "JA": "アリス"
-    }
+    "bodyUrl": "/images/agents/IconRole46.webp"
   },
   "1411": {
     "id": "1411",
@@ -671,13 +437,7 @@
     "element": 200,
     "icon": "IconRole47",
     "iconUrl": "/images/agents/IconRoleCrop47.webp",
-    "bodyUrl": "/images/agents/IconRole47.webp",
-    "names": {
-      "EN": "Yuzuha",
-      "KO": "유즈하",
-      "CHS": "柚叶",
-      "JA": "浮波柚葉"
-    }
+    "bodyUrl": "/images/agents/IconRole47.webp"
   },
   "1421": {
     "id": "1421",
@@ -688,13 +448,7 @@
     "element": 200,
     "icon": "IconRole45",
     "iconUrl": "/images/agents/IconRoleCrop45.webp",
-    "bodyUrl": "/images/agents/IconRole45.webp",
-    "names": {
-      "EN": "Pan Yinhu",
-      "KO": "반인호",
-      "CHS": "潘引壶",
-      "JA": "潘引壺"
-    }
+    "bodyUrl": "/images/agents/IconRole45.webp"
   },
   "1431": {
     "id": "1431",
@@ -705,13 +459,7 @@
     "element": 200,
     "icon": "IconRole55",
     "iconUrl": "/images/agents/IconRoleCrop55.webp",
-    "bodyUrl": "/images/agents/IconRole55.webp",
-    "names": {
-      "EN": "Ye Shunguang",
-      "KO": "엽빛나",
-      "CHS": "叶瞬光",
-      "JA": "葉瞬光"
-    }
+    "bodyUrl": "/images/agents/IconRole55.webp"
   },
   "1441": {
     "id": "1441",
@@ -722,13 +470,7 @@
     "element": 201,
     "icon": "IconRole51",
     "iconUrl": "/images/agents/IconRoleCrop51.webp",
-    "bodyUrl": "/images/agents/IconRole51.webp",
-    "names": {
-      "EN": "Manato",
-      "KO": "마나토",
-      "CHS": "真斗",
-      "JA": "狛野真斗"
-    }
+    "bodyUrl": "/images/agents/IconRole51.webp"
   },
   "1451": {
     "id": "1451",
@@ -739,13 +481,7 @@
     "element": 205,
     "icon": "IconRole50",
     "iconUrl": "/images/agents/IconRoleCrop50.webp",
-    "bodyUrl": "/images/agents/IconRole50.webp",
-    "names": {
-      "EN": "Lucia",
-      "KO": "루시아",
-      "CHS": "卢西娅",
-      "JA": "リュシア"
-    }
+    "bodyUrl": "/images/agents/IconRole50.webp"
   },
   "1461": {
     "id": "1461",
@@ -756,13 +492,7 @@
     "element": 203,
     "icon": "IconRole48",
     "iconUrl": "/images/agents/IconRoleCrop48.webp",
-    "bodyUrl": "/images/agents/IconRole48.webp",
-    "names": {
-      "EN": "Seed",
-      "KO": "「시드」",
-      "CHS": "「席德」",
-      "JA": "「シード」"
-    }
+    "bodyUrl": "/images/agents/IconRole48.webp"
   },
   "1471": {
     "id": "1471",
@@ -773,13 +503,7 @@
     "element": 201,
     "icon": "IconRole53",
     "iconUrl": "/images/agents/IconRoleCrop53.webp",
-    "bodyUrl": "/images/agents/IconRole53.webp",
-    "names": {
-      "EN": "Banyue",
-      "KO": "반악",
-      "CHS": "般岳",
-      "JA": "盤岳"
-    }
+    "bodyUrl": "/images/agents/IconRole53.webp"
   },
   "1481": {
     "id": "1481",
@@ -790,12 +514,6 @@
     "element": 200,
     "icon": "IconRole54",
     "iconUrl": "/images/agents/IconRoleCrop54.webp",
-    "bodyUrl": "/images/agents/IconRole54.webp",
-    "names": {
-      "EN": "Dialyn",
-      "KO": "다이아린",
-      "CHS": "琉音",
-      "JA": "ダイアリン"
-    }
+    "bodyUrl": "/images/agents/IconRole54.webp"
   }
 }

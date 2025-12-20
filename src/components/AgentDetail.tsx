@@ -1,9 +1,9 @@
 import { useStore, type Agent } from '@/lib/store'
 import { calculateAgentStats, getAllBuffsForAgent } from '@/lib/stats'
+import { resolveAssetPath } from '@/lib/utils'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Input } from '@/components/ui/input'
 import { DiscSlot } from './DiscSlot'
 import { WEngineSection } from './WEngineSection'
 import { BuffsSection } from './BuffsSection'
@@ -16,7 +16,6 @@ interface AgentDetailProps {
 }
 
 export function AgentDetail({ agent }: AgentDetailProps) {
-  const updateAgent = useStore((state) => state.updateAgent)
   const deleteAgent = useStore((state) => state.deleteAgent)
   const selectAgent = useStore((state) => state.selectAgent)
   const wEngines = useStore((state) => state.wEngines)
@@ -27,10 +26,6 @@ export function AgentDetail({ agent }: AgentDetailProps) {
   const stats = calculateAgentStats(agent, wEngines, allBuffs)
   
   const currentLoadout = agent.loadouts.find((l) => l.id === agent.currentLoadoutId)
-
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    updateAgent(agent.id, { name: e.target.value })
-  }
 
   const handleDelete = () => {
     deleteAgent(agent.id)
@@ -54,14 +49,7 @@ export function AgentDetail({ agent }: AgentDetailProps) {
       <Card className="bg-slate-900/50 border-cyan-300/20">
         <CardHeader>
           <div className="flex items-center justify-between">
-            <div className="flex-1">
-              <Input
-                value={agent.name}
-                onChange={handleNameChange}
-                className="text-xl font-bold bg-transparent border-cyan-300/20 text-cyan-300"
-                placeholder="Agent Name"
-              />
-            </div>
+            <h2 className="text-xl font-bold text-cyan-300">{agent.name}</h2>
             <Button
               onClick={handleDelete}
               variant="destructive"
@@ -72,41 +60,23 @@ export function AgentDetail({ agent }: AgentDetailProps) {
           </div>
         </CardHeader>
         <CardContent className="space-y-6">
-          {/* Agent images */}
-          <div className="grid grid-cols-2 gap-4">
-            {agent.iconUrl ? (
-              <div className="aspect-square bg-slate-800/50 border border-cyan-300/20 rounded-md overflow-hidden flex items-center justify-center">
-                <img
-                  src={agent.iconUrl}
-                  alt={`${agent.name} icon`}
-                  className="w-full h-full object-contain"
-                  onError={(e) => {
-                    e.currentTarget.parentElement!.innerHTML = '<span class="text-xs text-cyan-300/30">Icon Placeholder</span>'
-                  }}
-                />
-              </div>
-            ) : (
-              <div className="aspect-square bg-slate-800/50 border border-cyan-300/20 rounded-md flex items-center justify-center">
-                <span className="text-xs text-cyan-300/30">Icon Placeholder</span>
-              </div>
-            )}
-            {agent.bodyUrl ? (
-              <div className="aspect-[2/3] bg-slate-800/50 border border-cyan-300/20 rounded-md overflow-hidden flex items-center justify-center">
-                <img
-                  src={agent.bodyUrl}
-                  alt={`${agent.name} full body`}
-                  className="w-full h-full object-contain"
-                  onError={(e) => {
-                    e.currentTarget.parentElement!.innerHTML = '<span class="text-xs text-cyan-300/30">Full Body Placeholder</span>'
-                  }}
-                />
-              </div>
-            ) : (
-              <div className="aspect-[2/3] bg-slate-800/50 border border-cyan-300/20 rounded-md flex items-center justify-center">
-                <span className="text-xs text-cyan-300/30">Full Body Placeholder</span>
-              </div>
-            )}
-          </div>
+          {/* Agent full body image */}
+          {agent.bodyUrl ? (
+            <div className="aspect-[2/3] max-w-xs mx-auto bg-slate-800/50 border border-cyan-300/20 rounded-md overflow-hidden flex items-center justify-center">
+              <img
+                src={resolveAssetPath(agent.bodyUrl)}
+                alt={`${agent.name} full body`}
+                className="w-full h-full object-contain"
+                onError={(e) => {
+                  e.currentTarget.parentElement!.innerHTML = '<span class="text-xs text-cyan-300/30">Full Body Placeholder</span>'
+                }}
+              />
+            </div>
+          ) : (
+            <div className="aspect-[2/3] max-w-xs mx-auto bg-slate-800/50 border border-cyan-300/20 rounded-md flex items-center justify-center">
+              <span className="text-xs text-cyan-300/30">Full Body Placeholder</span>
+            </div>
+          )}
 
           {/* Loadout Selector */}
           <div>

@@ -21,12 +21,15 @@ export async function loadAgentsData(): Promise<Record<string, AgentData>> {
   }
   
   try {
-    // Try to load from public folder first (for production)
-    let response = await fetch('/agents-data.json').catch(() => null)
+    // Get base URL from Vite (handles base path in vite.config.ts)
+    const baseUrl = import.meta.env.BASE_URL || '/'
     
-    // If not found, try loading from src/lib (for development)
+    // Try to load from public folder with base path
+    let response = await fetch(`${baseUrl}agents-data.json`).catch(() => null)
+    
+    // If not found, try without base path (for development)
     if (!response || !response.ok) {
-      response = await fetch('/src/lib/agents-data.json').catch(() => null)
+      response = await fetch('/agents-data.json').catch(() => null)
     }
     
     if (response && response.ok) {

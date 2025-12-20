@@ -1,10 +1,10 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useStore } from '@/lib/store'
 import { loadAgentsData, type AgentData } from '@/lib/agents-data'
+import { resolveAssetPath } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { X } from 'lucide-react'
 
 interface AddAgentDialogProps {
@@ -55,8 +55,7 @@ export function AddAgentDialog({ open, onClose }: AddAgentDialogProps) {
     return Object.values(agentsData).filter((agent) => {
       // Search filter
       const matchesSearch = 
-        agent.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        agent.code.toLowerCase().includes(searchTerm.toLowerCase())
+        agent.name.toLowerCase().includes(searchTerm.toLowerCase())
       
       // Rank filter
       const matchesRank = filterRank === 'all' || agent.rank.toString() === filterRank
@@ -70,6 +69,35 @@ export function AddAgentDialog({ open, onClose }: AddAgentDialogProps) {
       return matchesSearch && matchesRank && matchesType && matchesElement
     })
   }, [agentsData, searchTerm, filterRank, filterType, filterElement])
+
+  const getRankLabel = (rank: number) => {
+    if (rank === 3) return 'A'
+    if (rank === 4) return 'S'
+    return `Rank ${rank}`
+  }
+
+  const getTypeLabel = (type: number) => {
+    const typeMap: Record<number, string> = {
+      1: 'Attack',
+      2: 'Stun',
+      3: 'Anomaly',
+      4: 'Support',
+      5: 'Defense',
+      6: 'Rupture',
+    }
+    return typeMap[type] || `Type ${type}`
+  }
+
+  const getElementLabel = (element: number) => {
+    const elementMap: Record<number, string> = {
+      200: 'Physical',
+      201: 'Fire',
+      202: 'Ice',
+      203: 'Electric',
+      205: 'Ether',
+    }
+    return elementMap[element] || `Element ${element}`
+  }
 
   const handleAddAgent = (agentData: AgentData) => {
     const id = addAgent({
@@ -113,46 +141,82 @@ export function AddAgentDialog({ open, onClose }: AddAgentDialogProps) {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="border-cyan-400/30 bg-slate-800/50"
             />
-            <div className="grid grid-cols-3 gap-2">
-              <Select value={filterRank} onValueChange={setFilterRank}>
-                <SelectTrigger className="border-cyan-400/30 bg-slate-800/50">
-                  <SelectValue placeholder="Rank" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Ranks</SelectItem>
+            <div className="space-y-2">
+              {/* Rank filter as buttons */}
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-cyan-300/70 min-w-[60px]">Rank:</span>
+                <div className="flex gap-2 flex-wrap">
+                  <Button
+                    variant={filterRank === 'all' ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setFilterRank('all')}
+                    className={filterRank === 'all' ? 'bg-cyan-400/20 border-cyan-400/50' : 'border-cyan-400/30'}
+                  >
+                    All
+                  </Button>
                   {uniqueRanks.map((rank) => (
-                    <SelectItem key={rank} value={rank.toString()}>
-                      Rank {rank} (Placeholder)
-                    </SelectItem>
+                    <Button
+                      key={rank}
+                      variant={filterRank === rank.toString() ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setFilterRank(rank.toString())}
+                      className={filterRank === rank.toString() ? 'bg-cyan-400/20 border-cyan-400/50' : 'border-cyan-400/30'}
+                    >
+                      {getRankLabel(rank)}
+                    </Button>
                   ))}
-                </SelectContent>
-              </Select>
-              <Select value={filterType} onValueChange={setFilterType}>
-                <SelectTrigger className="border-cyan-400/30 bg-slate-800/50">
-                  <SelectValue placeholder="Type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Types</SelectItem>
+                </div>
+              </div>
+              {/* Specialty filter as buttons */}
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-cyan-300/70 min-w-[80px]">Specialty:</span>
+                <div className="flex gap-2 flex-wrap">
+                  <Button
+                    variant={filterType === 'all' ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setFilterType('all')}
+                    className={filterType === 'all' ? 'bg-cyan-400/20 border-cyan-400/50' : 'border-cyan-400/30'}
+                  >
+                    All
+                  </Button>
                   {uniqueTypes.map((type) => (
-                    <SelectItem key={type} value={type.toString()}>
-                      Type {type} (Placeholder)
-                    </SelectItem>
+                    <Button
+                      key={type}
+                      variant={filterType === type.toString() ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setFilterType(type.toString())}
+                      className={filterType === type.toString() ? 'bg-cyan-400/20 border-cyan-400/50' : 'border-cyan-400/30'}
+                    >
+                      {getTypeLabel(type)}
+                    </Button>
                   ))}
-                </SelectContent>
-              </Select>
-              <Select value={filterElement} onValueChange={setFilterElement}>
-                <SelectTrigger className="border-cyan-400/30 bg-slate-800/50">
-                  <SelectValue placeholder="Element" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Elements</SelectItem>
+                </div>
+              </div>
+              {/* Element filter as buttons */}
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-cyan-300/70 min-w-[80px]">Element:</span>
+                <div className="flex gap-2 flex-wrap">
+                  <Button
+                    variant={filterElement === 'all' ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setFilterElement('all')}
+                    className={filterElement === 'all' ? 'bg-cyan-400/20 border-cyan-400/50' : 'border-cyan-400/30'}
+                  >
+                    All
+                  </Button>
                   {uniqueElements.map((element) => (
-                    <SelectItem key={element} value={element.toString()}>
-                      Element {element} (Placeholder)
-                    </SelectItem>
+                    <Button
+                      key={element}
+                      variant={filterElement === element.toString() ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setFilterElement(element.toString())}
+                      className={filterElement === element.toString() ? 'bg-cyan-400/20 border-cyan-400/50' : 'border-cyan-400/30'}
+                    >
+                      {getElementLabel(element)}
+                    </Button>
                   ))}
-                </SelectContent>
-              </Select>
+                </div>
+              </div>
             </div>
           </div>
           <div className="flex-1 overflow-y-auto">
@@ -161,27 +225,26 @@ export function AddAgentDialog({ open, onClose }: AddAgentDialogProps) {
             ) : filteredAgents.length === 0 ? (
               <p className="text-center text-cyan-400/60 py-8">No agents found</p>
             ) : (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                 {filteredAgents.map((agent) => (
                   <button
                     key={agent.id}
                     onClick={() => handleAddAgent(agent)}
                     className="p-3 bg-slate-800/50 border border-cyan-400/20 rounded-md hover:bg-slate-800/70 transition-colors text-left"
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-start gap-3">
                       {agent.iconUrl && (
                         <img
-                          src={agent.iconUrl}
+                          src={resolveAssetPath(agent.iconUrl)}
                           alt={agent.name}
-                          className="w-12 h-12 object-contain"
+                          className="w-12 h-12 object-contain flex-shrink-0"
                           onError={(e) => {
                             e.currentTarget.style.display = 'none'
                           }}
                         />
                       )}
                       <div className="flex-1 min-w-0">
-                        <div className="font-medium text-cyan-300 truncate">{agent.name}</div>
-                        <div className="text-xs text-cyan-400/60 truncate">{agent.code}</div>
+                        <div className="font-medium text-cyan-300 break-words">{agent.name}</div>
                       </div>
                     </div>
                   </button>

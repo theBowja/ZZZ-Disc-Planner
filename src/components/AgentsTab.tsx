@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useStore } from '@/lib/store'
+import { resolveAssetPath } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AgentDetail } from './AgentDetail'
@@ -48,9 +49,23 @@ export function AgentsTab() {
                         : 'bg-slate-800/50 border-cyan-400/20 hover:bg-slate-800/70'
                     }`}
                   >
-                    <div className="font-medium text-cyan-300">{agent.name}</div>
-                    <div className="text-xs text-cyan-400/60 mt-1">
-                      {agent.loadouts.length} loadout{agent.loadouts.length !== 1 ? 's' : ''}
+                    <div className="flex items-center gap-3">
+                      {agent.iconUrl && (
+                        <img
+                          src={resolveAssetPath(agent.iconUrl)}
+                          alt={agent.name}
+                          className="w-10 h-10 object-contain flex-shrink-0"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none'
+                          }}
+                        />
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <div className="font-medium text-cyan-300 truncate">{agent.name}</div>
+                        <div className="text-xs text-cyan-400/60 mt-1">
+                          {agent.loadouts.length} loadout{agent.loadouts.length !== 1 ? 's' : ''}
+                        </div>
+                      </div>
                     </div>
                   </button>
                 ))
