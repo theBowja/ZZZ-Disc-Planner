@@ -38,31 +38,6 @@ export function SettingsTab() {
           </Select>
         </CardContent>
       </Card>
-      <Card className="bg-slate-900/50 border-cyan-400/30">
-        <CardHeader>
-          <CardTitle className="text-cyan-300">Preview</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-2">
-          <p className="text-sm text-cyan-300/70">
-            Sample text with the selected font:
-          </p>
-          <Input
-            readOnly
-            value="Zenless Zone Zero — Disc Planner Sample"
-            className="border-cyan-400/30 bg-slate-800/50 text-cyan-100"
-            style={{
-              fontFamily:
-                fontPreset === "inter"
-                  ? "'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif"
-                  : fontPreset === "space"
-                    ? "'Space Grotesk', 'Segoe UI', system-ui, -apple-system, sans-serif"
-                    : fontPreset === "jetbrains"
-                      ? "'JetBrains Mono', 'Fira Code', 'SFMono-Regular', monospace"
-                      : "system-ui, -apple-system, 'Segoe UI', sans-serif",
-            }}
-          />
-        </CardContent>
-      </Card>
     </div>
   )
 }

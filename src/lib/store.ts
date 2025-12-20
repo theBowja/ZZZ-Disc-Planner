@@ -85,7 +85,7 @@ interface AppState {
   selectedAgentId: string | null
   
   // Agent actions
-  addAgent: (agent: Omit<Agent, 'id'>) => string
+  addAgent: (agent: Agent) => string
   updateAgent: (id: string, updates: Partial<Agent>) => void
   deleteAgent: (id: string) => void
   selectAgent: (id: string | null) => void
@@ -125,7 +125,11 @@ interface AppState {
   exportState: () => AppState
 }
 
-const generateId = () => Math.random().toString(36).substring(2, 9)
+/**
+ * Generates a unique ID for a new entity.
+ * @returns A unique ID
+ */
+const generateId = () => crypto.randomUUID();
 
 export const useStore = create<AppState>()(
   persist(
@@ -142,11 +146,22 @@ export const useStore = create<AppState>()(
         const newAgent: Agent = {
           id,
           ...agent,
-          loadouts: agent.loadouts.length > 0 
-            ? agent.loadouts 
-            : [{ id: generateId(), name: 'Default', discs: [null, null, null, null, null, null] }],
-          currentLoadoutId: agent.currentLoadoutId || agent.loadouts[0]?.id || null,
         }
+
+        if (!newAgent.loadouts || newAgent.loadouts.length === 0) {
+          newAgent.loadouts = [
+            {
+              id: "default",
+              name: 'Default Loadout',
+              discs: [null, null, null, null, null, null],
+            },
+          ]
+        }
+
+        if (!newAgent.currentLoadoutId) {
+          newAgent.currentLoadoutId = newAgent.loadouts[0].id
+        }
+
         set((state) => ({ agents: [...state.agents, newAgent] }))
         return id
       },

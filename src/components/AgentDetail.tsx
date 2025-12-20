@@ -34,12 +34,20 @@ export function AgentDetail({ agent }: AgentDetailProps) {
     }
   }
 
-  const handleAddLoadout = () => {
+  const handleAddLoadout = (loadoutName: string | null = null) => {
     const id = addLoadout(agent.id, {
-      name: `Loadout ${agent.loadouts.length + 1}`,
+      name: loadoutName || `Loadout ${agent.loadouts.length + 1}`,
       discs: [null, null, null, null, null, null],
     })
     setCurrentLoadout(agent.id, id)
+  }
+
+  const handleDeleteLoadout = () => {
+    if (currentLoadout) {
+      if (window.confirm(`Are you sure you want to delete ${currentLoadout.name}? This action cannot be undone.`)) {
+        setCurrentLoadout(agent.id, null)
+      }
+    }
   }
 
   const handleLoadoutChange = (loadoutId: string) => {
@@ -116,6 +124,16 @@ export function AgentDetail({ agent }: AgentDetailProps) {
                   >
                     Add Loadout
                   </Button>
+                  {agent.currentLoadoutId !== 'default' && (
+                    <Button
+                      onClick={handleDeleteLoadout}
+                      size="sm"
+                      variant="destructive"
+                      className="border-cyan-300/20"
+                    >
+                      Delete Loadout
+                    </Button>
+                  )}
                 </div>
               </div>
 

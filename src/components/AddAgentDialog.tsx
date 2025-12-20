@@ -13,6 +13,7 @@ interface AddAgentDialogProps {
 }
 
 export function AddAgentDialog({ open, onClose }: AddAgentDialogProps) {
+  const agents = useStore((state) => state.agents)
   const addAgent = useStore((state) => state.addAgent)
   const selectAgent = useStore((state) => state.selectAgent)
   const [agentsData, setAgentsData] = useState<Record<string, AgentData>>({})
@@ -65,10 +66,13 @@ export function AddAgentDialog({ open, onClose }: AddAgentDialogProps) {
       
       // Element filter
       const matchesElement = filterElement === 'all' || agent.element.toString() === filterElement
+
+      // Isn't already added
+      const alreadyAdded = agents.some(a => a.id === agent.id)
       
-      return matchesSearch && matchesRank && matchesType && matchesElement
+      return matchesSearch && matchesRank && matchesType && matchesElement && !alreadyAdded
     })
-  }, [agentsData, searchTerm, filterRank, filterType, filterElement])
+  }, [agentsData, searchTerm, filterRank, filterType, filterElement, agents])
 
   const getRankLabel = (rank: number) => {
     if (rank === 3) return 'A'
@@ -100,7 +104,8 @@ export function AddAgentDialog({ open, onClose }: AddAgentDialogProps) {
   }
 
   const handleAddAgent = (agentData: AgentData) => {
-    const id = addAgent({
+    const agentId = addAgent({
+      id: agentData.id,
       name: agentData.name,
       iconUrl: agentData.iconUrl,
       bodyUrl: agentData.bodyUrl,
@@ -111,7 +116,7 @@ export function AddAgentDialog({ open, onClose }: AddAgentDialogProps) {
       activeBuffIds: [],
       customBuffs: [],
     })
-    selectAgent(id)
+    selectAgent(agentId)
     onClose()
   }
 
@@ -237,6 +242,7 @@ export function AddAgentDialog({ open, onClose }: AddAgentDialogProps) {
                         <img
                           src={resolveAssetPath(agent.iconUrl)}
                           alt={agent.name}
+                          loading="lazy"
                           className="w-12 h-12 object-contain flex-shrink-0"
                           onError={(e) => {
                             e.currentTarget.style.display = 'none'
