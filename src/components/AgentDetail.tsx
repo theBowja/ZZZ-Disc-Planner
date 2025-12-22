@@ -9,7 +9,9 @@ import { WEngineSection } from './WEngineSection'
 import { BuffsSection } from './BuffsSection'
 import { FinalStats } from './FinalStats'
 import { StatWeights } from './StatWeights'
+import { AddWEngineDialog } from './AddWEngineDialog'
 import { X } from 'lucide-react'
+import { useState } from 'react'
 
 interface AgentDetailProps {
   agent: Agent
@@ -19,9 +21,10 @@ export function AgentDetail({ agent }: AgentDetailProps) {
   const deleteAgent = useStore((state) => state.deleteAgent)
   const selectAgent = useStore((state) => state.selectAgent)
   const wEngines = useStore((state) => state.wEngines)
-  const addLoadout = useStore((state) => state.addLoadout)
+  const duplicateLoadout = useStore((state) => state.duplicateLoadout)
   const setCurrentLoadout = useStore((state) => state.setCurrentLoadout)
   const deleteLoadout = useStore((state) => state.deleteLoadout)
+  const [showAddDialog, setShowAddDialog] = useState(false)
   
   const allBuffs = getAllBuffsForAgent(agent, wEngines)
   const stats = calculateAgentStats(agent, wEngines, allBuffs)
@@ -36,16 +39,13 @@ export function AgentDetail({ agent }: AgentDetailProps) {
   }
 
   const handleAddLoadout = () => {
-    const id = addLoadout(agent.id, {
-      name: `Loadout ${agent.loadouts.length + 1}`,
-      discs: [null, null, null, null, null, null],
-    })
+    const id = duplicateLoadout(agent.id, agent.currentLoadoutId)
     setCurrentLoadout(agent.id, id)
   }
 
   const handleDeleteLoadout = () => {
     if (currentLoadout) {
-      if (window.confirm(`Are you sure you want to delete ${currentLoadout.name}? This action cannot be undone.`)) {
+      if (window.confirm(`Are you sure you want to delete ${currentLoadout.loadoutName}? This action cannot be undone.`)) {
         deleteLoadout(agent.id, currentLoadout.id)
         setCurrentLoadout(agent.id, 'default')
       }
@@ -104,7 +104,7 @@ export function AgentDetail({ agent }: AgentDetailProps) {
                 <div className="flex items-center gap-2 flex-wrap">
                   <label className="text-sm font-medium text-cyan-300">Loadout</label>
                   <Select
-                    value={agent.currentLoadoutId || ''}
+                    value={agent.currentLoadoutId}
                     onValueChange={handleLoadoutChange}
                   >
                     <SelectTrigger className="w-48 border-cyan-300/20 bg-slate-800/50">
@@ -113,7 +113,7 @@ export function AgentDetail({ agent }: AgentDetailProps) {
                     <SelectContent>
                       {agent.loadouts.map((loadout) => (
                         <SelectItem key={loadout.id} value={loadout.id}>
-                          {loadout.name}
+                          {loadout.loadoutName}
                         </SelectItem>
                       ))}
                     </SelectContent>

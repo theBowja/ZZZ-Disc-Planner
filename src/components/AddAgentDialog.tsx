@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useStore } from '@/lib/store'
 import { loadAgentsData, type AgentData } from '@/lib/agents-data'
+import { getRankLabel, getTypeLabel, getElementLabel } from '@/lib/game-constants'
 import { resolveAssetPath } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -35,6 +36,8 @@ export function AddAgentDialog({ open, onClose }: AddAgentDialogProps) {
         })
     }
   }, [open])
+
+  if (!open) return null
 
   // Get unique filter values
   const uniqueRanks = useMemo(() => {
@@ -74,53 +77,11 @@ export function AddAgentDialog({ open, onClose }: AddAgentDialogProps) {
     })
   }, [agentsData, searchTerm, filterRank, filterType, filterElement, agents])
 
-  const getRankLabel = (rank: number) => {
-    if (rank === 3) return 'A'
-    if (rank === 4) return 'S'
-    return `Rank ${rank}`
-  }
-
-  const getTypeLabel = (type: number) => {
-    const typeMap: Record<number, string> = {
-      1: 'Attack',
-      2: 'Stun',
-      3: 'Anomaly',
-      4: 'Support',
-      5: 'Defense',
-      6: 'Rupture',
-    }
-    return typeMap[type] || `Type ${type}`
-  }
-
-  const getElementLabel = (element: number) => {
-    const elementMap: Record<number, string> = {
-      200: 'Physical',
-      201: 'Fire',
-      202: 'Ice',
-      203: 'Electric',
-      205: 'Ether',
-    }
-    return elementMap[element] || `Element ${element}`
-  }
-
   const handleAddAgent = (agentData: AgentData) => {
-    const agentId = addAgent({
-      id: agentData.id,
-      name: agentData.name,
-      iconUrl: agentData.iconUrl,
-      bodyUrl: agentData.bodyUrl,
-      baseStats: [],
-      equippedWEngineId: null,
-      currentLoadoutId: null,
-      loadouts: [],
-      activeBuffIds: [],
-      customBuffs: [],
-    })
+    const agentId = addAgent(agentData.id)
     selectAgent(agentId)
     onClose()
   }
-
-  if (!open) return null
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
