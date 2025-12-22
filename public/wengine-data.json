@@ -1,0 +1,576 @@
+{
+  "12001": {
+    "id": "12001",
+    "name": "[Lunar] Pleniluna",
+    "rank": 2,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_B_Common_01.webp"
+  },
+  "12002": {
+    "id": "12002",
+    "name": "[Lunar] Decrescent",
+    "rank": 2,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_B_Common_02.webp"
+  },
+  "12003": {
+    "id": "12003",
+    "name": "[Lunar] Noviluna",
+    "rank": 2,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_B_Common_03.webp"
+  },
+  "12004": {
+    "id": "12004",
+    "name": "[Reverb] Mark I",
+    "rank": 2,
+    "type": 4,
+    "iconUrl": "/images/wengines/Weapon_B_Common_04.webp"
+  },
+  "12005": {
+    "id": "12005",
+    "name": "[Reverb] Mark II",
+    "rank": 2,
+    "type": 4,
+    "iconUrl": "/images/wengines/Weapon_B_Common_05.webp"
+  },
+  "12006": {
+    "id": "12006",
+    "name": "[Reverb] Mark III",
+    "rank": 2,
+    "type": 4,
+    "iconUrl": "/images/wengines/Weapon_B_Common_06.webp"
+  },
+  "12007": {
+    "id": "12007",
+    "name": "[Vortex] Revolver",
+    "rank": 2,
+    "type": 2,
+    "iconUrl": "/images/wengines/Weapon_B_Common_07.webp"
+  },
+  "12008": {
+    "id": "12008",
+    "name": "[Vortex] Arrow",
+    "rank": 2,
+    "type": 2,
+    "iconUrl": "/images/wengines/Weapon_B_Common_08.webp"
+  },
+  "12009": {
+    "id": "12009",
+    "name": "[Vortex] Hatchet",
+    "rank": 2,
+    "type": 2,
+    "iconUrl": "/images/wengines/Weapon_B_Common_09.webp"
+  },
+  "12010": {
+    "id": "12010",
+    "name": "[Magnetic Storm] Alpha",
+    "rank": 2,
+    "type": 3,
+    "iconUrl": "/images/wengines/Weapon_B_Common_10.webp"
+  },
+  "12011": {
+    "id": "12011",
+    "name": "[Magnetic Storm] Bravo",
+    "rank": 2,
+    "type": 3,
+    "iconUrl": "/images/wengines/Weapon_B_Common_11.webp"
+  },
+  "12012": {
+    "id": "12012",
+    "name": "[Magnetic Storm] Charlie",
+    "rank": 2,
+    "type": 3,
+    "iconUrl": "/images/wengines/Weapon_B_Common_12.webp"
+  },
+  "12013": {
+    "id": "12013",
+    "name": "[Identity] Base",
+    "rank": 2,
+    "type": 5,
+    "iconUrl": "/images/wengines/Weapon_B_Common_13.webp"
+  },
+  "12014": {
+    "id": "12014",
+    "name": "[Identity] Inflection",
+    "rank": 2,
+    "type": 5,
+    "iconUrl": "/images/wengines/Weapon_B_Common_14.webp"
+  },
+  "12015": {
+    "id": "12015",
+    "name": "[Cinder] Cobalt",
+    "rank": 2,
+    "type": 6,
+    "iconUrl": "/images/wengines/Weapon_B_Common_15.webp"
+  },
+  "13001": {
+    "id": "13001",
+    "name": "Street Superstar",
+    "rank": 3,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_A_Common_01.webp"
+  },
+  "13002": {
+    "id": "13002",
+    "name": "Slice of Time",
+    "rank": 3,
+    "type": 4,
+    "iconUrl": "/images/wengines/Weapon_A_Common_02.webp"
+  },
+  "13003": {
+    "id": "13003",
+    "name": "Rainforest Gourmet",
+    "rank": 3,
+    "type": 3,
+    "iconUrl": "/images/wengines/Weapon_A_Common_03.webp"
+  },
+  "13004": {
+    "id": "13004",
+    "name": "Starlight Engine",
+    "rank": 3,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_A_Common_04.webp"
+  },
+  "13005": {
+    "id": "13005",
+    "name": "Steam Oven",
+    "rank": 3,
+    "type": 2,
+    "iconUrl": "/images/wengines/Weapon_A_Common_05.webp"
+  },
+  "13006": {
+    "id": "13006",
+    "name": "Precious Fossilized Core",
+    "rank": 3,
+    "type": 2,
+    "iconUrl": "/images/wengines/Weapon_A_Common_06.webp"
+  },
+  "13007": {
+    "id": "13007",
+    "name": "Original Transmorpher",
+    "rank": 3,
+    "type": 5,
+    "iconUrl": "/images/wengines/Weapon_A_Common_07.webp"
+  },
+  "13008": {
+    "id": "13008",
+    "name": "Weeping Gemini",
+    "rank": 3,
+    "type": 3,
+    "iconUrl": "/images/wengines/Weapon_A_Common_08.webp"
+  },
+  "13009": {
+    "id": "13009",
+    "name": "Electro-Lip Gloss",
+    "rank": 3,
+    "type": 3,
+    "iconUrl": "/images/wengines/Weapon_A_Common_09.webp"
+  },
+  "13010": {
+    "id": "13010",
+    "name": "Bunny Band",
+    "rank": 3,
+    "type": 5,
+    "iconUrl": "/images/wengines/Weapon_A_Common_10.webp"
+  },
+  "13011": {
+    "id": "13011",
+    "name": "Spring Embrace",
+    "rank": 3,
+    "type": 5,
+    "iconUrl": "/images/wengines/Weapon_A_Common_11.webp"
+  },
+  "13012": {
+    "id": "13012",
+    "name": "Puzzle Sphere",
+    "rank": 3,
+    "type": 6,
+    "iconUrl": "/images/wengines/Weapon_A_Common_12.webp"
+  },
+  "13013": {
+    "id": "13013",
+    "name": "Gilded Blossom",
+    "rank": 3,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_A_Common_13.webp"
+  },
+  "13014": {
+    "id": "13014",
+    "name": "Radiowave Journey",
+    "rank": 3,
+    "type": 6,
+    "iconUrl": "/images/wengines/Weapon_A_Common_14.webp"
+  },
+  "13015": {
+    "id": "13015",
+    "name": "Marcato Desire",
+    "rank": 3,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_A_Common_15.webp"
+  },
+  "13016": {
+    "id": "13016",
+    "name": "Reel Projector",
+    "rank": 3,
+    "type": 5,
+    "iconUrl": "/images/wengines/Weapon_A_Common_16.webp"
+  },
+  "13019": {
+    "id": "13019",
+    "name": "Cauldron of Clarity",
+    "rank": 3,
+    "type": 6,
+    "iconUrl": "/images/wengines/Weapon_A_Common_19.webp"
+  },
+  "13101": {
+    "id": "13101",
+    "name": "Demara Battery Mark II",
+    "rank": 3,
+    "type": 2,
+    "iconUrl": "/images/wengines/Weapon_A_1011.webp"
+  },
+  "13103": {
+    "id": "13103",
+    "name": "The Vault",
+    "rank": 3,
+    "type": 4,
+    "iconUrl": "/images/wengines/Weapon_A_1031.webp"
+  },
+  "13106": {
+    "id": "13106",
+    "name": "Housekeeper",
+    "rank": 3,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_A_1061.webp"
+  },
+  "13108": {
+    "id": "13108",
+    "name": "Starlight Engine Replica",
+    "rank": 3,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_A_1081.webp"
+  },
+  "13111": {
+    "id": "13111",
+    "name": "Drill Rig - Red Axis",
+    "rank": 3,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_A_1111.webp"
+  },
+  "13112": {
+    "id": "13112",
+    "name": "Big Cylinder",
+    "rank": 3,
+    "type": 5,
+    "iconUrl": "/images/wengines/Weapon_A_1121.webp"
+  },
+  "13113": {
+    "id": "13113",
+    "name": "Bashful Demon",
+    "rank": 3,
+    "type": 4,
+    "iconUrl": "/images/wengines/Weapon_A_1131.webp"
+  },
+  "13115": {
+    "id": "13115",
+    "name": "Kaboom the Cannon",
+    "rank": 3,
+    "type": 4,
+    "iconUrl": "/images/wengines/Weapon_A_1151.webp"
+  },
+  "13127": {
+    "id": "13127",
+    "name": "Peacekeeper - Specialized",
+    "rank": 3,
+    "type": 5,
+    "iconUrl": "/images/wengines/Weapon_A_1271.webp"
+  },
+  "13128": {
+    "id": "13128",
+    "name": "Roaring Ride",
+    "rank": 3,
+    "type": 3,
+    "iconUrl": "/images/wengines/Weapon_A_1281.webp"
+  },
+  "13135": {
+    "id": "13135",
+    "name": "Box Cutter",
+    "rank": 3,
+    "type": 2,
+    "iconUrl": "/images/wengines/Weapon_A_1351.webp"
+  },
+  "13142": {
+    "id": "13142",
+    "name": "Tremor Trigram Vessel",
+    "rank": 3,
+    "type": 5,
+    "iconUrl": "/images/wengines/Weapon_A_1421.webp"
+  },
+  "13144": {
+    "id": "13144",
+    "name": "Grill O'Wisp",
+    "rank": 3,
+    "type": 6,
+    "iconUrl": "/images/wengines/Weapon_A_1441.webp"
+  },
+  "14001": {
+    "id": "14001",
+    "name": "Cannon Rotor",
+    "rank": 3,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_S_Common_01.webp"
+  },
+  "14002": {
+    "id": "14002",
+    "name": "Unfettered Game Ball",
+    "rank": 3,
+    "type": 4,
+    "iconUrl": "/images/wengines/Weapon_S_Common_02.webp"
+  },
+  "14003": {
+    "id": "14003",
+    "name": "Six Shooter",
+    "rank": 3,
+    "type": 2,
+    "iconUrl": "/images/wengines/Weapon_S_Common_03.webp"
+  },
+  "14102": {
+    "id": "14102",
+    "name": "Steel Cushion",
+    "rank": 4,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_S_1021.webp"
+  },
+  "14104": {
+    "id": "14104",
+    "name": "The Brimstone",
+    "rank": 4,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_S_1041.webp"
+  },
+  "14105": {
+    "id": "14105",
+    "name": "Kraken's Cradle",
+    "rank": 4,
+    "type": 6,
+    "iconUrl": "/images/wengines/Weapon_S_1051.webp"
+  },
+  "14107": {
+    "id": "14107",
+    "name": "Tusks of Fury",
+    "rank": 4,
+    "type": 5,
+    "iconUrl": "/images/wengines/Weapon_S_1071.webp"
+  },
+  "14109": {
+    "id": "14109",
+    "name": "Hailstorm Shrine",
+    "rank": 4,
+    "type": 3,
+    "iconUrl": "/images/wengines/Weapon_S_1091.webp"
+  },
+  "14110": {
+    "id": "14110",
+    "name": "Hellfire Gears",
+    "rank": 4,
+    "type": 2,
+    "iconUrl": "/images/wengines/Weapon_S_1101.webp"
+  },
+  "14114": {
+    "id": "14114",
+    "name": "The Restrained",
+    "rank": 4,
+    "type": 2,
+    "iconUrl": "/images/wengines/Weapon_S_1141.webp"
+  },
+  "14116": {
+    "id": "14116",
+    "name": "Blazing Laurel",
+    "rank": 4,
+    "type": 2,
+    "iconUrl": "/images/wengines/Weapon_S_1161.webp"
+  },
+  "14117": {
+    "id": "14117",
+    "name": "Flamemaker Shaker",
+    "rank": 4,
+    "type": 3,
+    "iconUrl": "/images/wengines/Weapon_S_1171.webp"
+  },
+  "14118": {
+    "id": "14118",
+    "name": "Fusion Compiler",
+    "rank": 4,
+    "type": 3,
+    "iconUrl": "/images/wengines/Weapon_S_1181.webp"
+  },
+  "14119": {
+    "id": "14119",
+    "name": "Deep Sea Visitor",
+    "rank": 4,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_S_1191.webp"
+  },
+  "14120": {
+    "id": "14120",
+    "name": "Zanshin Herb Case",
+    "rank": 4,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_S_1201.webp"
+  },
+  "14121": {
+    "id": "14121",
+    "name": "Weeping Cradle",
+    "rank": 4,
+    "type": 4,
+    "iconUrl": "/images/wengines/Weapon_S_1211.webp"
+  },
+  "14122": {
+    "id": "14122",
+    "name": "Timeweaver",
+    "rank": 4,
+    "type": 3,
+    "iconUrl": "/images/wengines/Weapon_S_1221.webp"
+  },
+  "14124": {
+    "id": "14124",
+    "name": "Riot Suppressor Mark VI",
+    "rank": 4,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_S_1241.webp"
+  },
+  "14125": {
+    "id": "14125",
+    "name": "Ice-Jade Teapot",
+    "rank": 4,
+    "type": 2,
+    "iconUrl": "/images/wengines/Weapon_S_1251.webp"
+  },
+  "14126": {
+    "id": "14126",
+    "name": "Sharpened Stinger",
+    "rank": 4,
+    "type": 3,
+    "iconUrl": "/images/wengines/Weapon_S_1261.webp"
+  },
+  "14129": {
+    "id": "14129",
+    "name": "Myriad Eclipse",
+    "rank": 4,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_S_1291.webp"
+  },
+  "14130": {
+    "id": "14130",
+    "name": "Bellicose Blaze",
+    "rank": 4,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_S_1301.webp"
+  },
+  "14131": {
+    "id": "14131",
+    "name": "Elegant Vanity",
+    "rank": 4,
+    "type": 4,
+    "iconUrl": "/images/wengines/Weapon_S_1311.webp"
+  },
+  "14132": {
+    "id": "14132",
+    "name": "Heartstring Nocturne",
+    "rank": 4,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_S_1321.webp"
+  },
+  "14133": {
+    "id": "14133",
+    "name": "Flight of Fancy",
+    "rank": 4,
+    "type": 3,
+    "iconUrl": "/images/wengines/Weapon_S_1331.webp"
+  },
+  "14134": {
+    "id": "14134",
+    "name": "Half-Sugar Bunny",
+    "rank": 4,
+    "type": 5,
+    "iconUrl": "/images/wengines/Weapon_S_1341.webp"
+  },
+  "14136": {
+    "id": "14136",
+    "name": "Spectral Gaze",
+    "rank": 4,
+    "type": 2,
+    "iconUrl": "/images/wengines/Weapon_S_1361.webp"
+  },
+  "14137": {
+    "id": "14137",
+    "name": "Qingming Birdcage",
+    "rank": 4,
+    "type": 6,
+    "iconUrl": "/images/wengines/Weapon_S_1371.webp"
+  },
+  "14138": {
+    "id": "14138",
+    "name": "Severed Innocence",
+    "rank": 4,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_S_1381.webp"
+  },
+  "14139": {
+    "id": "14139",
+    "name": "Roaring Fur-nace",
+    "rank": 4,
+    "type": 2,
+    "iconUrl": "/images/wengines/Weapon_S_1391.webp"
+  },
+  "14140": {
+    "id": "14140",
+    "name": "Practiced Perfection",
+    "rank": 4,
+    "type": 3,
+    "iconUrl": "/images/wengines/Weapon_S_1401.webp"
+  },
+  "14141": {
+    "id": "14141",
+    "name": "Metanukimorphosis",
+    "rank": 4,
+    "type": 4,
+    "iconUrl": "/images/wengines/Weapon_S_1411.webp"
+  },
+  "14143": {
+    "id": "14143",
+    "name": "Cloudcleave Radiance",
+    "rank": 4,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_S_1431.webp"
+  },
+  "14145": {
+    "id": "14145",
+    "name": "Dreamlit Hearth",
+    "rank": 4,
+    "type": 4,
+    "iconUrl": "/images/wengines/Weapon_S_1451.webp"
+  },
+  "14146": {
+    "id": "14146",
+    "name": "Cordis Germina",
+    "rank": 4,
+    "type": 1,
+    "iconUrl": "/images/wengines/Weapon_S_1461.webp"
+  },
+  "14147": {
+    "id": "14147",
+    "name": "Wrathful Vajra",
+    "rank": 4,
+    "type": 6,
+    "iconUrl": "/images/wengines/Weapon_S_1471.webp"
+  },
+  "14148": {
+    "id": "14148",
+    "name": "Yesterday Calls",
+    "rank": 4,
+    "type": 2,
+    "iconUrl": "/images/wengines/Weapon_S_1481.webp"
+  }
+}

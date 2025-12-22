@@ -1,7 +1,6 @@
 {
   "1011": {
     "id": "1011",
-    "code": "Anby",
     "name": "Anby",
     "rank": 3,
     "type": 2,
@@ -12,7 +11,6 @@
   },
   "1021": {
     "id": "1021",
-    "code": "Nekomata",
     "name": "Nekomata",
     "rank": 4,
     "type": 1,
@@ -23,7 +21,6 @@
   },
   "1031": {
     "id": "1031",
-    "code": "Nicole",
     "name": "Nicole",
     "rank": 3,
     "type": 4,
@@ -34,7 +31,6 @@
   },
   "1041": {
     "id": "1041",
-    "code": "Soldier 11",
     "name": "Soldier 11",
     "rank": 4,
     "type": 1,
@@ -45,7 +41,6 @@
   },
   "1051": {
     "id": "1051",
-    "code": "Yidhari",
     "name": "Yidhari",
     "rank": 4,
     "type": 6,
@@ -56,7 +51,6 @@
   },
   "1061": {
     "id": "1061",
-    "code": "Corin",
     "name": "Corin",
     "rank": 3,
     "type": 1,
@@ -67,7 +61,6 @@
   },
   "1071": {
     "id": "1071",
-    "code": "Caesar",
     "name": "Caesar",
     "rank": 4,
     "type": 5,
@@ -78,7 +71,6 @@
   },
   "1081": {
     "id": "1081",
-    "code": "Billy",
     "name": "Billy",
     "rank": 3,
     "type": 1,
@@ -89,7 +81,6 @@
   },
   "1091": {
     "id": "1091",
-    "code": "Miyabi",
     "name": "Miyabi",
     "rank": 4,
     "type": 3,
@@ -100,7 +91,6 @@
   },
   "1101": {
     "id": "1101",
-    "code": "Koleda",
     "name": "Koleda",
     "rank": 4,
     "type": 2,
@@ -111,7 +101,6 @@
   },
   "1111": {
     "id": "1111",
-    "code": "Anton",
     "name": "Anton",
     "rank": 3,
     "type": 1,
@@ -122,7 +111,6 @@
   },
   "1121": {
     "id": "1121",
-    "code": "Ben",
     "name": "Ben",
     "rank": 3,
     "type": 5,
@@ -133,7 +121,6 @@
   },
   "1131": {
     "id": "1131",
-    "code": "Soukaku",
     "name": "Soukaku",
     "rank": 3,
     "type": 4,
@@ -144,7 +131,6 @@
   },
   "1141": {
     "id": "1141",
-    "code": "Lycaon",
     "name": "Lycaon",
     "rank": 4,
     "type": 2,
@@ -155,7 +141,6 @@
   },
   "1151": {
     "id": "1151",
-    "code": "Lucy",
     "name": "Lucy",
     "rank": 3,
     "type": 4,
@@ -166,7 +151,6 @@
   },
   "1161": {
     "id": "1161",
-    "code": "Lighter",
     "name": "Lighter",
     "rank": 4,
     "type": 2,
@@ -177,7 +161,6 @@
   },
   "1171": {
     "id": "1171",
-    "code": "Burnice",
     "name": "Burnice",
     "rank": 4,
     "type": 3,
@@ -188,7 +171,6 @@
   },
   "1181": {
     "id": "1181",
-    "code": "Grace",
     "name": "Grace",
     "rank": 4,
     "type": 3,
@@ -199,7 +181,6 @@
   },
   "1191": {
     "id": "1191",
-    "code": "Ellen",
     "name": "Ellen",
     "rank": 4,
     "type": 1,
@@ -210,7 +191,6 @@
   },
   "1201": {
     "id": "1201",
-    "code": "Harumasa",
     "name": "Harumasa",
     "rank": 4,
     "type": 1,
@@ -221,7 +201,6 @@
   },
   "1211": {
     "id": "1211",
-    "code": "Rina",
     "name": "Rina",
     "rank": 4,
     "type": 4,
@@ -232,7 +211,6 @@
   },
   "1221": {
     "id": "1221",
-    "code": "Yanagi",
     "name": "Yanagi",
     "rank": 4,
     "type": 3,
@@ -243,7 +221,6 @@
   },
   "1241": {
     "id": "1241",
-    "code": "Zhu Yuan",
     "name": "Zhu Yuan",
     "rank": 4,
     "type": 1,
@@ -254,7 +231,6 @@
   },
   "1251": {
     "id": "1251",
-    "code": "QingYi",
     "name": "Qingyi",
     "rank": 4,
     "type": 2,
@@ -265,7 +241,6 @@
   },
   "1261": {
     "id": "1261",
-    "code": "Jane",
     "name": "Jane",
     "rank": 4,
     "type": 3,
@@ -276,7 +251,6 @@
   },
   "1271": {
     "id": "1271",
-    "code": "Seth",
     "name": "Seth",
     "rank": 3,
     "type": 5,
@@ -287,7 +261,6 @@
   },
   "1281": {
     "id": "1281",
-    "code": "Piper",
     "name": "Piper",
     "rank": 3,
     "type": 3,
@@ -298,7 +271,6 @@
   },
   "1291": {
     "id": "1291",
-    "code": "Hugo",
     "name": "Hugo",
     "rank": 4,
     "type": 1,
@@ -309,7 +281,6 @@
   },
   "1301": {
     "id": "1301",
-    "code": "Orphie & Magus",
     "name": "Orphie & Magus",
     "rank": 4,
     "type": 1,
@@ -320,7 +291,6 @@
   },
   "1311": {
     "id": "1311",
-    "code": "Astra",
     "name": "Astra Yao",
     "rank": 4,
     "type": 4,
@@ -331,7 +301,6 @@
   },
   "1321": {
     "id": "1321",
-    "code": "Evelyn",
     "name": "Evelyn",
     "rank": 4,
     "type": 1,
@@ -342,7 +311,6 @@
   },
   "1331": {
     "id": "1331",
-    "code": "Vivian",
     "name": "Vivian",
     "rank": 4,
     "type": 3,
@@ -353,7 +321,6 @@
   },
   "1341": {
     "id": "1341",
-    "code": "Avatar_Female_Size00_XiaoZhao_En",
     "name": "Zhao",
     "rank": 4,
     "type": 5,
@@ -364,7 +331,6 @@
   },
   "1351": {
     "id": "1351",
-    "code": "Pulchra",
     "name": "Pulchra",
     "rank": 3,
     "type": 2,
@@ -375,7 +341,6 @@
   },
   "1361": {
     "id": "1361",
-    "code": "Trigger",
     "name": "Trigger",
     "rank": 4,
     "type": 2,
@@ -386,7 +351,6 @@
   },
   "1371": {
     "id": "1371",
-    "code": "YiXuan",
     "name": "Yixuan",
     "rank": 4,
     "type": 6,
@@ -397,7 +361,6 @@
   },
   "1381": {
     "id": "1381",
-    "code": "Soldier 0 - Anby",
     "name": "Soldier 0 - Anby",
     "rank": 4,
     "type": 1,
@@ -408,7 +371,6 @@
   },
   "1391": {
     "id": "1391",
-    "code": "Ju Fufu",
     "name": "Ju Fufu",
     "rank": 4,
     "type": 2,
@@ -419,7 +381,6 @@
   },
   "1401": {
     "id": "1401",
-    "code": "Alice",
     "name": "Alice",
     "rank": 4,
     "type": 3,
@@ -430,7 +391,6 @@
   },
   "1411": {
     "id": "1411",
-    "code": "Yuzuha",
     "name": "Yuzuha",
     "rank": 4,
     "type": 4,
@@ -441,7 +401,6 @@
   },
   "1421": {
     "id": "1421",
-    "code": "Yinhu",
     "name": "Pan Yinhu",
     "rank": 3,
     "type": 5,
@@ -452,7 +411,6 @@
   },
   "1431": {
     "id": "1431",
-    "code": "Avatar_Female_Size02_Zhenzhen_En",
     "name": "Ye Shunguang",
     "rank": 4,
     "type": 1,
@@ -463,7 +421,6 @@
   },
   "1441": {
     "id": "1441",
-    "code": "Manato",
     "name": "Manato",
     "rank": 3,
     "type": 6,
@@ -474,7 +431,6 @@
   },
   "1451": {
     "id": "1451",
-    "code": "Lucia",
     "name": "Lucia",
     "rank": 4,
     "type": 4,
@@ -485,7 +441,6 @@
   },
   "1461": {
     "id": "1461",
-    "code": "Seed",
     "name": "Seed",
     "rank": 4,
     "type": 1,
@@ -496,7 +451,6 @@
   },
   "1471": {
     "id": "1471",
-    "code": "Banyue",
     "name": "Banyue",
     "rank": 4,
     "type": 6,
@@ -507,7 +461,6 @@
   },
   "1481": {
     "id": "1481",
-    "code": "Dialyn",
     "name": "Dialyn",
     "rank": 4,
     "type": 2,

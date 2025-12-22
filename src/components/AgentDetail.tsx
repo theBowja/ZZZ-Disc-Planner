@@ -21,6 +21,7 @@ export function AgentDetail({ agent }: AgentDetailProps) {
   const wEngines = useStore((state) => state.wEngines)
   const addLoadout = useStore((state) => state.addLoadout)
   const setCurrentLoadout = useStore((state) => state.setCurrentLoadout)
+  const deleteLoadout = useStore((state) => state.deleteLoadout)
   
   const allBuffs = getAllBuffsForAgent(agent, wEngines)
   const stats = calculateAgentStats(agent, wEngines, allBuffs)
@@ -34,9 +35,9 @@ export function AgentDetail({ agent }: AgentDetailProps) {
     }
   }
 
-  const handleAddLoadout = (loadoutName: string | null = null) => {
+  const handleAddLoadout = () => {
     const id = addLoadout(agent.id, {
-      name: loadoutName || `Loadout ${agent.loadouts.length + 1}`,
+      name: `Loadout ${agent.loadouts.length + 1}`,
       discs: [null, null, null, null, null, null],
     })
     setCurrentLoadout(agent.id, id)
@@ -45,7 +46,8 @@ export function AgentDetail({ agent }: AgentDetailProps) {
   const handleDeleteLoadout = () => {
     if (currentLoadout) {
       if (window.confirm(`Are you sure you want to delete ${currentLoadout.name}? This action cannot be undone.`)) {
-        setCurrentLoadout(agent.id, null)
+        deleteLoadout(agent.id, currentLoadout.id)
+        setCurrentLoadout(agent.id, 'default')
       }
     }
   }

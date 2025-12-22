@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "fetch-agents": "node scripts/fetch-agents.js"
+    "fetch-agents": "node scripts/fetch-agents.js",
+    "fetch-wengines": "node scripts/fetch-wengines.js"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.3.3",

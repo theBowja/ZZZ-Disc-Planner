@@ -141,8 +141,8 @@ function transformAgentData(agents) {
     
     transformed[id] = {
       id,
-      code: agent.code,
-      name: agent.EN || agent.code,
+      // code: agent.code, // not used
+      name: agent.EN,
       rank: agent.rank,
       type: agent.type,
       element: agent.element,
