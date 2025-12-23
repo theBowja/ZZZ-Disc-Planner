@@ -1,6 +1,5 @@
 export interface AgentData {
   id: string
-  // code: string
   name: string
   rank: number
   type: number

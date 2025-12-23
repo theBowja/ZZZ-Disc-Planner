@@ -3,18 +3,20 @@ import { useEffect } from 'react'
 import { useStore } from '../lib/store'
 
 // hooks/useMetadata.ts
-export function useDb<T>(key: 'agents' | 'wengines') {
+export function useDb<T>(key: 'agents' | 'wengines', enabled: boolean = true) {
   const data = useStore((s) => s.db[key]);
   const isLoading = useStore((s) => s.loadingStates[key]);
   const fetchDb = useStore((s) => s.fetchDb);
 
   useEffect(() => {
-    fetchDb(key);
-  }, [key, fetchDb]);
+    if (enabled) {
+      fetchDb(key);
+    }
+  }, [key, fetchDb, enabled]);
 
   return {
-    data: data as Record<string, T> | null, // Cast to the specific type you're expecting
+    data: data as Record<string, T> | null,
+    dataList: (data ? Object.values(data) : []) as T[],
     isLoading,
-    list: (data ? Object.values(data) : []) as T[],
   };
 }

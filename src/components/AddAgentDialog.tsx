@@ -20,7 +20,7 @@ export function AddAgentDialog({ onClose }: AddAgentDialogProps) {
   const selectAgent = useStore((state) => state.selectAgent)
 
   // 2. Database Hook (Triggers fetch immediately on mount)
-  const { data: agentsData, list: agentsDataList, isLoading } = useDb<AgentData>('agents')
+  const { dataList: agentsDataList, isLoading } = useDb<AgentData>('agents')
 
   // 3. Local UI State (Resets automatically when dialog unmounts)
   const [searchTerm, setSearchTerm] = useState('')
@@ -32,17 +32,17 @@ export function AddAgentDialog({ onClose }: AddAgentDialogProps) {
   const uniqueRanks = useMemo(() => {
     const ranks = new Set(agentsDataList.map((a) => a.rank));
     return Array.from(ranks).sort((a, b) => (b as number) - (a as number));
-  }, [agentsData]);
+  }, [agentsDataList]);
   
   const uniqueTypes = useMemo(() => {
     const types = new Set(agentsDataList.map((a) => a.type));
     return Array.from(types).sort((a, b) => (a as number) - (b as number));
-  }, [agentsData]);
+  }, [agentsDataList]);
   
   const uniqueElements = useMemo(() => {
     const elements = new Set(agentsDataList.map((a) => a.element));
     return Array.from(elements).sort((a, b) => (a as number) - (b as number));
-  }, [agentsData]);
+  }, [agentsDataList]);
 
   // Filter Logic
   const filteredAgents = useMemo(() => {

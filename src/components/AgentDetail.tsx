@@ -12,12 +12,14 @@ import { StatWeights } from './StatWeights'
 import { AddWEngineDialog } from './AddWEngineDialog'
 import { X } from 'lucide-react'
 import { useState } from 'react'
+import { type AgentData } from '@/lib/agents-data'
 
 interface AgentDetailProps {
-  agent: Agent
+  agent: Agent,
+  agentData: AgentData | undefined
 }
 
-export function AgentDetail({ agent }: AgentDetailProps) {
+export function AgentDetail({ agent, agentData }: AgentDetailProps) {
   const deleteAgent = useStore((state) => state.deleteAgent)
   const selectAgent = useStore((state) => state.selectAgent)
   const duplicateLoadout = useStore((state) => state.duplicateLoadout)
@@ -30,8 +32,8 @@ export function AgentDetail({ agent }: AgentDetailProps) {
   
   const currentLoadout = agent.loadouts.find((l) => l.id === agent.currentLoadoutId)
 
-  const handleDelete = () => {
-    if (window.confirm(`Are you sure you want to delete ${agent.name}? This action cannot be undone.`)) {
+  const handleDeleteAgent = (agentName : string) => {
+    if (window.confirm(`Are you sure you want to delete ${agentName}? This action cannot be undone.`)) {
       deleteAgent(agent.id)
       selectAgent(null)
     }
@@ -60,14 +62,16 @@ export function AgentDetail({ agent }: AgentDetailProps) {
       <Card className="bg-slate-900/50 border-cyan-300/20">
         <CardHeader>
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold text-cyan-300">{agent.name}</h2>
-            <Button
-              onClick={handleDelete}
-              variant="destructive"
-              size="sm"
-            >
-              Delete Agent
-            </Button>
+            <h2 className="text-xl font-bold text-cyan-300">{agentData?.name}</h2>
+            {agentData && (
+              <Button
+                onClick={() => handleDeleteAgent(agentData.name)}
+                variant="destructive"
+                size="sm"
+              >
+                Delete Agent
+              </Button>
+            )}
           </div>
         </CardHeader>
         <CardContent>
@@ -75,11 +79,11 @@ export function AgentDetail({ agent }: AgentDetailProps) {
             {/* Left side: Agent image and Final Stats */}
             <div className="flex-shrink-0 space-y-4">
               {/* Agent full body image */}
-              {agent.bodyUrl ? (
+              {agentData ? (
                 <div className="aspect-[2/3] w-64 bg-slate-800/50 border border-cyan-300/20 rounded-md overflow-hidden flex items-center justify-center">
                   <img
-                    src={resolveAssetPath(agent.bodyUrl)}
-                    alt={`${agent.name} full body`}
+                    src={resolveAssetPath(agentData.bodyUrl)}
+                    alt={`${agentData.name} full body`}
                     className="w-full h-full object-contain"
                     onError={(e) => {
                       e.currentTarget.parentElement!.innerHTML = '<span class="text-xs text-cyan-300/30">Full Body Placeholder</span>'
@@ -167,7 +171,7 @@ export function AgentDetail({ agent }: AgentDetailProps) {
       </Card>
 
       {/* Buffs Section */}
-      <BuffsSection loadout={currentLoadout} allBuffs={allBuffs} />
+      {/* <BuffsSection loadout={currentLoadout} allBuffs={allBuffs} /> */}
 
       {/* Stat Weights */}
       <StatWeights />

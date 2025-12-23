@@ -162,6 +162,9 @@ export const useStore = create<AppState>()(
         }));
 
         try {
+          console.log(`Testing: Delaying ${key} for 3 seconds...`);
+          await new Promise((resolve) => setTimeout(resolve, 3000));
+
           const loaders: Record<keyof AppState['db'], () => Promise<any>> = {
             agents: loadAgentsData,
             wengines: loadWEnginesData,

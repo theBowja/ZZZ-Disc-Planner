@@ -6,12 +6,15 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AgentDetail } from './AgentDetail'
 import { AddAgentDialog } from './AddAgentDialog'
 import { Plus } from 'lucide-react'
+import { useDb } from '@/hooks/useDb'
+import { type AgentData } from '@/lib/agents-data'
 
 export function AgentsTab() {
   const agents = useStore((state) => state.agents)
   const selectedAgentId = useStore((state) => state.selectedAgentId)
   const selectAgent = useStore((state) => state.selectAgent)
   const [showAddDialog, setShowAddDialog] = useState(false)
+  const { data: agentsData } = useDb<AgentData>('agents', agents.length > 0);
 
   const selectedAgent = agents.find((a) => a.id === selectedAgentId)
 
@@ -39,33 +42,40 @@ export function AgentsTab() {
                   No agents yet. Add one to get started.
                 </p>
               ) : (
-                agents.map((agent) => (
-                  <button
-                    key={agent.id}
-                    onClick={() => selectAgent(agent.id)}
-                    className={`w-full text-left p-3 rounded-md border transition-colors ${
-                      selectedAgentId === agent.id
-                        ? 'bg-cyan-400/20 border-cyan-400/50'
-                        : 'bg-slate-800/50 border-cyan-400/20 hover:bg-slate-800/70'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      {agent.iconUrl && (
-                        <img
-                          src={resolveAssetPath(agent.iconUrl)}
-                          alt={agent.name}
-                          className="w-10 h-10 object-contain flex-shrink-0"
-                          onError={(e) => {
-                            e.currentTarget.style.display = 'none'
-                          }}
-                        />
-                      )}
-                      <div className="flex-1 min-w-0">
-                        <div className="font-medium text-cyan-300 truncate">{agent.name}</div>
+                agents.map((agent) => {
+                  const agentData = agentsData?.[agent.id]
+
+                  return (
+                    /** Select Agent */
+                    <button
+                      key={agent.id}
+                      onClick={() => selectAgent(agent.id)}
+                      className={`w-full text-left p-3 rounded-md border transition-colors ${
+                        selectedAgentId === agent.id
+                          ? 'bg-cyan-400/20 border-cyan-400/50'
+                          : 'bg-slate-800/50 border-cyan-400/20 hover:bg-slate-800/70'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        {agentData?.iconUrl ? (
+                          <img
+                            src={resolveAssetPath(agentData.iconUrl)}
+                            alt={agentData.name}
+                            className="w-10 h-10 object-contain flex-shrink-0"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none'
+                            }}
+                          />
+                        ) : (
+                          <div className="w-10 h-10 animate-pulse bg-slate-700/50" />
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <div className="font-medium text-cyan-300 truncate">{agentData?.name || ''}</div>
+                        </div>
                       </div>
-                    </div>
-                  </button>
-                ))
+                    </button>
+                  )
+                })
               )}
             </div>
           </CardContent>
@@ -73,8 +83,8 @@ export function AgentsTab() {
       </div>
 
       <div className="lg:col-span-4">
-        {selectedAgent ? (
-          <AgentDetail agent={selectedAgent} />
+        {selectedAgent && agentsData?.[selectedAgent.id] ? (
+          <AgentDetail agent={selectedAgent} agentData={agentsData?.[selectedAgent.id]} />
         ) : (
           <Card className="bg-slate-900/50 border-cyan-400/30">
             <CardContent className="py-12 text-center">
