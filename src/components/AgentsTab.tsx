@@ -86,10 +86,9 @@ export function AgentsTab() {
         )}
       </div>
 
-      <AddAgentDialog
-        open={showAddDialog}
-        onClose={() => setShowAddDialog(false)}
-      />
+      {showAddDialog && (
+        <AddAgentDialog onClose={() => setShowAddDialog(false)} />
+      )}
     </div>
   )
 }

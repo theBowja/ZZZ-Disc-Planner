@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useStore, type Agent, type Buff, type StatName } from '@/lib/store'
+import { useStore, type Buff, type Loadout, type StatName } from '@/lib/store'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -8,7 +8,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Plus, X } from 'lucide-react'
 
 interface BuffsSectionProps {
-  agent: Agent
+  loadout: Loadout
   allBuffs: Buff[]
 }
 
@@ -26,7 +26,7 @@ const STAT_NAMES: StatName[] = [
   'PEN Ratio',
 ]
 
-export function BuffsSection({ agent, allBuffs }: BuffsSectionProps) {
+export function BuffsSection({ loadout, allBuffs }: BuffsSectionProps) {
   const toggleBuff = useStore((state) => state.toggleBuff)
   const addCustomBuff = useStore((state) => state.addCustomBuff)
   const deleteCustomBuff = useStore((state) => state.deleteCustomBuff)
@@ -35,12 +35,12 @@ export function BuffsSection({ agent, allBuffs }: BuffsSectionProps) {
   const [newBuffValue, setNewBuffValue] = useState('')
 
   const handleToggleBuff = (buffId: string) => {
-    toggleBuff(agent.id, buffId)
+    toggleBuff(loadout.id, buffId)
   }
 
   const handleAddCustomBuff = () => {
     if (!newBuffLabel.trim()) return
-    addCustomBuff(agent.id, {
+    addCustomBuff(loadout.id, {
       label: newBuffLabel,
       stats: [{ stat: newBuffStat, value: parseFloat(newBuffValue) || 0 }],
       active: false,
@@ -51,7 +51,7 @@ export function BuffsSection({ agent, allBuffs }: BuffsSectionProps) {
   }
 
   const handleDeleteCustomBuff = (buffId: string) => {
-    deleteCustomBuff(agent.id, buffId)
+    deleteCustomBuff(loadout.id, buffId)
   }
 
   // Group buffs by source
@@ -59,7 +59,7 @@ export function BuffsSection({ agent, allBuffs }: BuffsSectionProps) {
     self: allBuffs.filter((b) => b.source === 'self'),
     'w-engine': allBuffs.filter((b) => b.source === 'w-engine'),
     disc: allBuffs.filter((b) => b.source === 'disc'),
-    custom: agent.customBuffs,
+    custom: loadout.customBuffs,
   }
 
   return (
@@ -79,7 +79,7 @@ export function BuffsSection({ agent, allBuffs }: BuffsSectionProps) {
                   className="flex items-center gap-2 p-2 bg-slate-800/50 rounded border border-cyan-300/10"
                 >
                   <Checkbox
-                    checked={agent.activeBuffIds.includes(buff.id)}
+                    checked={loadout.activeBuffIds.includes(buff.id)}
                     onCheckedChange={() => handleToggleBuff(buff.id)}
                   />
                   <span className="text-sm text-cyan-300/70 flex-1">{buff.label}</span>
@@ -100,7 +100,7 @@ export function BuffsSection({ agent, allBuffs }: BuffsSectionProps) {
                   className="flex items-center gap-2 p-2 bg-slate-800/50 rounded border border-cyan-300/10"
                 >
                   <Checkbox
-                    checked={agent.activeBuffIds.includes(buff.id)}
+                    checked={loadout.activeBuffIds.includes(buff.id)}
                     onCheckedChange={() => handleToggleBuff(buff.id)}
                   />
                   <span className="text-sm text-cyan-300/70 flex-1">{buff.label}</span>
@@ -121,7 +121,7 @@ export function BuffsSection({ agent, allBuffs }: BuffsSectionProps) {
                   className="flex items-center gap-2 p-2 bg-slate-800/50 rounded border border-cyan-300/10"
                 >
                   <Checkbox
-                    checked={agent.activeBuffIds.includes(buff.id)}
+                    checked={loadout.activeBuffIds.includes(buff.id)}
                     onCheckedChange={() => handleToggleBuff(buff.id)}
                   />
                   <span className="text-sm text-cyan-300/70 flex-1">{buff.label}</span>
@@ -141,7 +141,7 @@ export function BuffsSection({ agent, allBuffs }: BuffsSectionProps) {
                 className="flex items-center gap-2 p-2 bg-slate-800/50 rounded border border-cyan-300/10"
               >
                 <Checkbox
-                  checked={agent.activeBuffIds.includes(buff.id)}
+                  checked={loadout.activeBuffIds.includes(buff.id)}
                   onCheckedChange={() => handleToggleBuff(buff.id)}
                 />
                 <span className="text-sm text-cyan-300/70 flex-1">{buff.label}</span>

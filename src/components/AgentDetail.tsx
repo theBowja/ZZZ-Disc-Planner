@@ -20,14 +20,13 @@ interface AgentDetailProps {
 export function AgentDetail({ agent }: AgentDetailProps) {
   const deleteAgent = useStore((state) => state.deleteAgent)
   const selectAgent = useStore((state) => state.selectAgent)
-  const wEngines = useStore((state) => state.wEngines)
   const duplicateLoadout = useStore((state) => state.duplicateLoadout)
   const setCurrentLoadout = useStore((state) => state.setCurrentLoadout)
   const deleteLoadout = useStore((state) => state.deleteLoadout)
   const [showAddDialog, setShowAddDialog] = useState(false)
   
-  const allBuffs = getAllBuffsForAgent(agent, wEngines)
-  const stats = calculateAgentStats(agent, wEngines, allBuffs)
+  const allBuffs = getAllBuffsForAgent(agent)
+  const stats = calculateAgentStats(agent, allBuffs)
   
   const currentLoadout = agent.loadouts.find((l) => l.id === agent.currentLoadoutId)
 
@@ -140,7 +139,7 @@ export function AgentDetail({ agent }: AgentDetailProps) {
               </div>
 
               {/* W-Engine Section */}
-              <WEngineSection agent={agent} />
+              {/* <WEngineSection agent={agent} /> */}
 
               {/* Disc Drive Section */}
               {currentLoadout && (
@@ -168,7 +167,7 @@ export function AgentDetail({ agent }: AgentDetailProps) {
       </Card>
 
       {/* Buffs Section */}
-      <BuffsSection agent={agent} allBuffs={allBuffs} />
+      <BuffsSection loadout={currentLoadout} allBuffs={allBuffs} />
 
       {/* Stat Weights */}
       <StatWeights />

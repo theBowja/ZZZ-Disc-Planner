@@ -1,6 +1,8 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { getAgentData } from './agents-data'
+import { loadAgentsData, type AgentData } from './agents-data'
+import { loadWEnginesData, type WEngineData } from './wengines-data'
 
 export type StatName = 
   | 'ATK' 
@@ -73,11 +75,22 @@ export interface StatWeights {
 }
 
 interface AppState {
+  // Static game data (Not persisted)
+  db: {
+    agents: Record<string, AgentData> | null;
+    wengines: Record<string, WEngineData> | null;
+  };
+  loadingStates: Record<string, boolean>;
+
+  // Persisted
   fontPreset: 'inter' | 'jetbrains' | 'space' | 'system'
   agents: Agent[]
   areas: Area[]
   statWeights: StatWeights
   selectedAgentId: string | null
+
+  // Actions
+  fetchDb: (key: keyof AppState['db']) => Promise<void>;
   
   // Agent actions
   addAgent: (dataId: string) => string
@@ -129,11 +142,45 @@ const generateUniqueId = () => crypto.randomUUID();
 export const useStore = create<AppState>()(
   persist(
     (set, get) => ({
+      db: { agents: null, wengines: null },
+      loadingStates: {},
+
       fontPreset: 'inter',
       agents: [],
       areas: [],
       statWeights: {},
       selectedAgentId: null,
+
+      // #region Database
+
+      fetchDb: async (key) => {
+        const { db, loadingStates } = get();
+        if (db[key] || loadingStates[key]) return;
+
+        set((state) => ({
+          loadingStates: { ...state.loadingStates, [key]: true }
+        }));
+
+        try {
+          const loaders: Record<keyof AppState['db'], () => Promise<any>> = {
+            agents: loadAgentsData,
+            wengines: loadWEnginesData,
+          };
+
+          const data = await loaders[key]();
+
+          set((state) => ({
+            db: { ...state.db, [key]: data },
+            loadingStates: { ...state.loadingStates, [key]: false }
+          }));
+        } catch (error) {
+          set((state) => ({
+            loadingStates: { ...state.loadingStates, [key]: false }
+          }));
+        }
+      },
+
+      // #endregion
 
       // #region Agent
 
@@ -383,6 +430,13 @@ export const useStore = create<AppState>()(
     }),
     {
       name: 'zzz-disc-planner-storage',
+      partialize: (state) => ({ 
+        fontPreset: state.fontPreset,
+        agents: state.agents,
+        areas: state.areas,
+        selectedAgentId: state.selectedAgentId,
+        statWeights: state.statWeights,
+      })
     }
   )
 )

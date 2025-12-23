@@ -1,7 +1,7 @@
 export const RANK_LABELS: Record<number, string> = {
-  1: 'B',
-  2: 'A',
-  3: 'S',
+  2: 'B',
+  3: 'A',
+  4: 'S',
 };
 
 export const TYPE_LABELS: Record<number, string> = {

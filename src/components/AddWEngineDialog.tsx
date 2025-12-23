@@ -34,8 +34,6 @@ export function AddWEngineDialog({ open, onClose }: AddWEngineDialogProps) {
     }
   }, [open])
 
-  if (!open) return null
-
   // Get unique filter values
   const uniqueRanks = useMemo(() => {
     const ranks = new Set(Object.values(wEnginesData).map(a => a.rank))
@@ -61,6 +59,7 @@ export function AddWEngineDialog({ open, onClose }: AddWEngineDialogProps) {
       
       return matchesSearch && matchesRank && matchesType
     })
-  }, [wEnginesData, searchTerm, filterRank, filterType, filterElement, wEngines])
+  }, [wEnginesData, searchTerm, filterRank, filterType, filterElement])
 
+  if (!open) return null
 }
