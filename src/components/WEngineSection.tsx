@@ -1,21 +1,24 @@
-import { type Agent, type Loadout } from '@/lib/store'
+import { type Agent, type Loadout, type WEngine } from '@/lib/store'
 import { useStore } from '@/lib/store'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
 import { AddWEngineDialog } from './AddWEngineDialog'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useDb } from '@/hooks/useDb'
 import { type WEngineData } from '@/lib/wengines-data'
+import { resolveAssetPath } from '@/lib/utils'
 
 interface WEngineSectionProps {
-  agentId: string | null
-  loadout: Loadout
+  agentId: string
+  loadoutId: string
+  wEngine: WEngine | null
 }
 
-export function WEngineSection({ agentId, loadout }: WEngineSectionProps) {
-  const { data: wenginesData, isLoading } = useDb<WEngineData>('wengines', !loadout.wEngine)
+export function WEngineSection({ agentId, loadoutId, wEngine }: WEngineSectionProps) {
+  // Database Hooks
+  const { data: wEnginesData, isLoading } = useDb<WEngineData>('wengines', wEngine !== null)
 
   // const addWEngine = useStore((state) => state.addWEngine)
   const [showAddDialog, setShowAddDialog] = useState(false)
@@ -48,7 +51,7 @@ export function WEngineSection({ agentId, loadout }: WEngineSectionProps) {
             className="border-cyan-300/20"
           >
             <Plus className="h-4 w-4 mr-2" />
-            {loadout.wEngine ? 'Change W-Engine' : 'Set W-Engine'}
+            {wEngine ? 'Change W-Engine' : 'Set W-Engine'}
           </Button>
         </div>
       </CardHeader>
@@ -71,11 +74,22 @@ export function WEngineSection({ agentId, loadout }: WEngineSectionProps) {
           </SelectContent>
         </Select> */}
 
-        {loadout.wEngine && (
+        {wEngine && (
           <div className="space-y-4">
-            {/* Placeholder for W-Engine image */}
+            {/* W-Engine image */}
             <div className="aspect-video bg-slate-800/50 border border-cyan-300/20 rounded-md flex items-center justify-center">
-              <span className="text-xs text-cyan-300/30">W-Engine Image Placeholder</span>
+              { wEnginesData ? (
+                <img
+                  src={resolveAssetPath(wEnginesData[wEngine.id].iconUrl)}
+                  alt={wEnginesData[wEngine.id].name}
+                  className="w-full h-full object-contain"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none'
+                  }}
+                />
+              ) : (
+                <div className="w-full h-full animate-pulse bg-slate-700/50" />
+              )}           
             </div>
 
             {/* Placeholder for W-Engine stats */}
@@ -90,7 +104,7 @@ export function WEngineSection({ agentId, loadout }: WEngineSectionProps) {
       </CardContent>
 
       {showAddDialog && (
-        <AddWEngineDialog agentId={agentId} loadoutId={loadout.id} onClose={() => setShowAddDialog(false)} />
+        <AddWEngineDialog agentId={agentId} loadoutId={loadoutId} onClose={() => setShowAddDialog(false)} />
       )}
     </Card>
   )

@@ -161,8 +161,8 @@ export const useStore = create<AppState>()(
         });
 
         try {
-          console.log(`Testing: Delaying ${key} for 3 seconds...`);
-          await new Promise((resolve) => setTimeout(resolve, 3000));
+          console.log(`Testing: Delaying ${key} for 2 seconds...`);
+          await new Promise((resolve) => setTimeout(resolve, 2000));
 
           const loaders: Record<keyof AppState['db'], () => Promise<any>> = {
             agents: loadAgentsData,
@@ -237,6 +237,7 @@ export const useStore = create<AppState>()(
           const agent = state.agents.find(a => a.id === agentId);
           const loadout = agent?.loadouts.find(l => l.id === loadoutId);
           if (loadout) loadout.wEngine = wEngine;
+          else throw new Error(`Could not find loadout with ID ${loadoutId} for agent with ID ${agentId}.`);
         });
       },
 

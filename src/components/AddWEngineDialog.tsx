@@ -1,6 +1,7 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useStore } from '@/lib/store'
-import { type WEngineData } from '@/lib/agents-data' // Assuming WEngineData is in the same file
+import { type AgentData } from '@/lib/agents-data'
+import { type WEngineData } from '@/lib/wengines-data'
 import { getRankLabel, getTypeLabel } from '@/lib/game-constants'
 import { resolveAssetPath } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -16,17 +17,43 @@ interface AddWEngineDialogProps {
 }
 
 export function AddWEngineDialog({ agentId, loadoutId, onClose }: AddWEngineDialogProps) {
-  // 1. Store Actions/State - Pointed to W-Engine specific store logic
+  // 1. Store Actions/State
   const updateWEngine = useStore((state) => state.updateWEngine)
   const deleteWEngine = useStore((state) => state.deleteWEngine)
   
-  // 2. Database Hook for W-Engines
-  const { dataList: wEnginesDataList, isLoading } = useDb<WEngineData>('wengines')
+  // 2. Database Hooks
+  const { dataList: wEnginesDataList, isLoading: loadingWEngines } = useDb<WEngineData>('wengines')
+  const { data: agentsData, isLoading: loadingAgents } = useDb<AgentData>('agents')
+
+  // Find the current agent's specialty to use as initial state
+  const initialType = useMemo(() => {
+    const agent = agentsData?.[agentId];
+    return agent ? agent.type.toString() : 'all';
+  }, [agentsData, agentId]);
 
   // 3. Local UI State
   const [searchTerm, setSearchTerm] = useState('')
   const [filterRank, setFilterRank] = useState<string>('all')
-  const [filterType, setFilterType] = useState<string>('all')
+  const [filterType, setFilterType] = useState<string>(initialType)
+
+  // Sync filterType if agentsDataList finishes loading after initial render
+  useEffect(() => {
+    if (filterType === 'all' && initialType !== 'all') {
+      setFilterType(initialType);
+    }
+  }, [initialType]);
+
+  // // Find the current agent's specialty to pre-filter
+  // const currentAgentType = useMemo(() => {
+  //   return agentsData?.[agentId]?.type
+  // }, [agentsData, agentId])
+
+  // // Set default filter to agent's specialty once data loads
+  // useEffect(() => {
+  //   if (currentAgentType && filterType === 'all') {
+  //     setFilterType(currentAgentType.toString())
+  //   }
+  // }, [currentAgentType])
 
   // Get unique filter values
   const uniqueRanks = useMemo(() => {
@@ -39,25 +66,37 @@ export function AddWEngineDialog({ agentId, loadoutId, onClose }: AddWEngineDial
     return Array.from(types).sort((a, b) => (a as number) - (b as number));
   }, [wEnginesDataList]);
 
-  // Filter Logic
+  // Filter Logic + Sorting (S-Rank first)
   const filteredWEngines = useMemo(() => {
-    return wEnginesDataList.filter((engine) => {
-      const matchesSearch = engine.name.toLowerCase().includes(searchTerm.toLowerCase())
-      const matchesRank = filterRank === 'all' || engine.rank.toString() === filterRank
-      const matchesType = filterType === 'all' || engine.type.toString() === filterType
+    return wEnginesDataList
+      .filter((engine) => {
+        const matchesSearch = engine.name.toLowerCase().includes(searchTerm.toLowerCase())
+        const matchesRank = filterRank === 'all' || engine.rank.toString() === filterRank
+        const matchesType = filterType === 'all' || engine.type.toString() === filterType
 
-      return matchesSearch && matchesRank && matchesType
-    })
+        // Prefilter by agent type if no manual type filter is selected
+        // const matchesType = filterType === 'all' 
+        //   ? (currentAgentType ? engine.type === currentAgentType : true)
+        //   : engine.type.toString() === filterType
+
+        return matchesSearch && matchesRank && matchesType
+      })
+      .sort((a, b) => (b.rank as number) - (a.rank as number)) // Sort S-Rank (highest number) first
   }, [wEnginesDataList, searchTerm, filterRank, filterType])
 
   const handleAddWEngine = (engineData: WEngineData) => {
-    // addWEngine(engineData.id)
+    updateWEngine(agentId, loadoutId, {
+      id: engineData.id,
+      overclock: 1,
+    })
     onClose()
   }
 
+  const isLoading = loadingWEngines || loadingAgents
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <Card className="bg-slate-900 border-amber-400/30 w-full max-w-2xl max-h-[80vh] flex flex-col shadow-2xl">
+      <Card className="bg-slate-900 border-amber-400/30 w-full max-w-4xl max-h-[80vh] flex flex-col shadow-2xl">
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="text-amber-400">Equip W-Engine</CardTitle>
@@ -135,9 +174,9 @@ export function AddWEngineDialog({ agentId, loadoutId, onClose }: AddWEngineDial
             {isLoading ? (
               <p className="text-center text-amber-400/60 py-8">Loading W-Engines...</p>
             ) : filteredWEngines.length === 0 ? (
-              <p className="text-center text-amber-400/60 py-8">No W-Engines found</p>
+              <p className="text-center text-amber-400/60 py-8">No compatible W-Engines found</p>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {filteredWEngines.map((engine) => (
                   <button
                     key={engine.id}

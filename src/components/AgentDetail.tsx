@@ -6,13 +6,10 @@ import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { DiscSlot } from './DiscSlot'
 import { WEngineSection } from './WEngineSection'
-import { BuffsSection } from './BuffsSection'
+// import { BuffsSection } from './BuffsSection'
 import { FinalStats } from './FinalStats'
 import { StatWeights } from './StatWeights'
-import { AddWEngineDialog } from './AddWEngineDialog'
-import { X } from 'lucide-react'
 import { useMemo, useState } from 'react'
-import { useDb } from '@/hooks/useDb'
 import { type AgentData } from '@/lib/agents-data'
 
 interface AgentDetailProps {
@@ -26,15 +23,15 @@ export function AgentDetail({ agent, agentData }: AgentDetailProps) {
   const duplicateLoadout = useStore((state) => state.duplicateLoadout)
   const setCurrentLoadout = useStore((state) => state.setCurrentLoadout)
   const deleteLoadout = useStore((state) => state.deleteLoadout)
-  const [showAddDialog, setShowAddDialog] = useState(false)
+  // const [showAddDialog, setShowAddDialog] = useState(false)
   
   const allBuffs = getAllBuffsForAgent(agent)
   const stats = calculateAgentStats(agent, allBuffs)
   
-  // const currentLoadout = agent.loadouts.find((l) => l.id === agent.currentLoadoutId)
-  const currentLoadout = useMemo(() => {
-    return agent.loadouts.find((l) => l.id === agent.currentLoadoutId)!;
-  }, [agent.currentLoadoutId]);
+  const currentLoadout = agent.loadouts.find((l) => l.id === agent.currentLoadoutId)
+  // const currentLoadout = useMemo(() => {
+  //   return agent.loadouts.find((l) => l.id === agent.currentLoadoutId)!;
+  // }, [agent]);
 
   const handleDeleteAgent = (agentName : string) => {
     if (window.confirm(`Are you sure you want to delete ${agentName}? This action cannot be undone.`)) {
@@ -81,8 +78,8 @@ export function AgentDetail({ agent, agentData }: AgentDetailProps) {
         </CardHeader>
         <CardContent>
           <div className="flex flex-col md:flex-row gap-6">
-            {/* Left side: Agent image and Final Stats */}
             <div className="flex-shrink-0 space-y-4">
+
               {/* Agent full body image */}
               <div className="aspect-[2/3] w-64 bg-slate-800/50 border border-cyan-300/20 rounded-md overflow-hidden flex items-center justify-center">
                 {agentData && (
@@ -95,7 +92,8 @@ export function AgentDetail({ agent, agentData }: AgentDetailProps) {
                   }}
                 />
                 )}
-              </div>              
+              </div>
+
               {/* Final Stats */}
               <FinalStats stats={stats} />
             </div>
@@ -143,7 +141,7 @@ export function AgentDetail({ agent, agentData }: AgentDetailProps) {
               </div>
 
               {/* W-Engine Section */}
-              <WEngineSection agentId={agent.id} loadout={currentLoadout} />
+              <WEngineSection agentId={agent.id} loadoutId={agent.currentLoadoutId} wEngine={currentLoadout.wEngine} />
 
               {/* Disc Drive Section */}
               {currentLoadout && (
