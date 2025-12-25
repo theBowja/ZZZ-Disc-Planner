@@ -9,6 +9,7 @@ import { useMemo, useState } from 'react'
 import { useDb } from '@/hooks/useDb'
 import { type WEngineData } from '@/lib/wengines-data'
 import { resolveAssetPath } from '@/lib/utils'
+import useApi from '@/hooks/useApi'
 
 interface WEngineSectionProps {
   agentId: string
@@ -19,25 +20,17 @@ interface WEngineSectionProps {
 export function WEngineSection({ agentId, loadoutId, wEngine }: WEngineSectionProps) {
   // Database Hooks
   const { data: wEnginesData, isLoading } = useDb<WEngineData>('wengines', wEngine !== null)
-
-  // const addWEngine = useStore((state) => state.addWEngine)
   const [showAddDialog, setShowAddDialog] = useState(false)
-  
-  // const equippedWEngine = wEngines.find((w) => w.id === agent.equippedWEngineId)
+  const { data: apiData, isLoading: isApiLoading } = useApi<any>('weapon', wEngine?.id)
 
-  // const handleWEngineChange = (wEngineId: string) => {
-  //   updateAgent(agent.id, { equippedWEngineId: wEngineId === 'none' ? null : wEngineId })
-  // }
+  // Retrieve current W-Engine details from fetched data list
+  const details = useMemo(() => {
+    if (!wEnginesData || !wEngine) return null
+    return wEnginesData[wEngine.id]
+  }, [wEnginesData, wEngine])
 
-  // const handleAddWEngine = () => {
-  //   const id = addWEngine({
-  //     name: 'New W-Engine',
-  //     iconUrl: '',
-  //     stats: [],
-  //     buffs: [],
-  //   })
-  //   updateAgent(agent.id, { equippedWEngineId: id })
-  // }
+  const talentDescription =
+    apiData && wEngine?.overclock ? apiData.Talents?.[wEngine.overclock.toString()] : null
 
   return (
     <Card className="bg-slate-900/50 border-cyan-300/20">
@@ -55,50 +48,54 @@ export function WEngineSection({ agentId, loadoutId, wEngine }: WEngineSectionPr
           </Button>
         </div>
       </CardHeader>
-      <CardContent className="space-y-4">
-        {/* W-Engine Selector */}
-        {/* <Select
-          value={loadout.wEngine || 'none'}
-          onValueChange={handleWEngineChange}
-        >
-          <SelectTrigger className="w-full border-cyan-300/20 bg-slate-800/50">
-            <SelectValue placeholder="Select W-Engine" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="none">None</SelectItem>
-            {wEngines.map((wEngine) => (
-              <SelectItem key={wEngine.id} value={wEngine.id}>
-                {wEngine.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select> */}
-
-        {wEngine && (
-          <div className="space-y-4">
-            {/* W-Engine image */}
-            <div className="aspect-video bg-slate-800/50 border border-cyan-300/20 rounded-md flex items-center justify-center">
-              { wEnginesData ? (
+      
+      <CardContent>
+        {wEngine ? (
+          <div className="flex flex-col sm:flex-row gap-6">
+            {/* LEFT: W-Engine Image */}
+            <div className="w-full sm:w-32 h-32 bg-slate-800/50 border border-cyan-300/10 rounded-lg flex items-center justify-center overflow-hidden shrink-0">
+              {details ? (
                 <img
-                  src={resolveAssetPath(wEnginesData[wEngine.id].iconUrl)}
-                  alt={wEnginesData[wEngine.id].name}
-                  className="w-full h-full object-contain"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none'
-                  }}
+                  src={resolveAssetPath(details.iconUrl)}
+                  alt={details.name}
+                  className="w-full h-full object-contain p-2"
                 />
               ) : (
                 <div className="w-full h-full animate-pulse bg-slate-700/50" />
-              )}           
+              )}
             </div>
 
-            {/* Placeholder for W-Engine stats */}
-            <div className="space-y-2">
-              <h4 className="text-sm font-medium text-cyan-300">Stats (Placeholder)</h4>
-              <div className="text-xs text-cyan-300/50">
-                Stats will be displayed here once implemented
+            {/* RIGHT: Details, Description, and Stats */}
+            <div className="flex-1 space-y-4 min-w-0">
+              <div>
+                <h3 className="text-lg font-bold text-cyan-100 truncate">
+                  {details?.name || 'Loading...'}
+                </h3>
+                <p className="text-sm text-cyan-300/70 leading-relaxed mt-1 line-clamp-3">
+                  {isApiLoading
+                    ? 'Loading description...'
+                    : talentDescription || 'Description not available.'}
+                </p>
+              </div>
+
+              {/* Stats Section */}
+              <div className="pt-2 border-t border-cyan-300/10">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <span className="text-[10px] uppercase tracking-wider text-cyan-300/40 font-bold">Base ATK</span>
+                    <p className="text-sm font-mono text-cyan-100">48</p>
+                  </div>
+                  <div className="space-y-1">
+                    <span className="text-[10px] uppercase tracking-wider text-cyan-300/40 font-bold">Advanced Stat</span>
+                    <p className="text-sm font-mono text-cyan-100">ATK 10%</p>
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
+        ) : (
+          <div className="py-12 flex flex-col items-center justify-center border-2 border-dashed border-cyan-300/5 rounded-lg">
+            <p className="text-cyan-300/30 text-sm">No W-Engine equipped to this loadout.</p>
           </div>
         )}
       </CardContent>
