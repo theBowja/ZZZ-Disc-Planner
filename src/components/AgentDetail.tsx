@@ -31,7 +31,10 @@ export function AgentDetail({ agent, agentData }: AgentDetailProps) {
   const allBuffs = getAllBuffsForAgent(agent)
   const stats = calculateAgentStats(agent, allBuffs)
   
-  const currentLoadout = agent.loadouts.find((l) => l.id === agent.currentLoadoutId)
+  // const currentLoadout = agent.loadouts.find((l) => l.id === agent.currentLoadoutId)
+  const currentLoadout = useMemo(() => {
+    return agent.loadouts.find((l) => l.id === agent.currentLoadoutId)!;
+  }, [agent.currentLoadoutId]);
 
   const handleDeleteAgent = (agentName : string) => {
     if (window.confirm(`Are you sure you want to delete ${agentName}? This action cannot be undone.`)) {
@@ -140,7 +143,7 @@ export function AgentDetail({ agent, agentData }: AgentDetailProps) {
               </div>
 
               {/* W-Engine Section */}
-              <WEngineSection agentId={agent.id} loadoutId={agent.currentLoadoutId} />
+              <WEngineSection agentId={agent.id} loadout={currentLoadout} />
 
               {/* Disc Drive Section */}
               {currentLoadout && (

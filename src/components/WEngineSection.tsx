@@ -1,4 +1,4 @@
-import { type Agent } from '@/lib/store'
+import { type Agent, type Loadout } from '@/lib/store'
 import { useStore } from '@/lib/store'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -6,23 +6,25 @@ import { Button } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
 import { AddWEngineDialog } from './AddWEngineDialog'
 import { useState } from 'react'
+import { useDb } from '@/hooks/useDb'
+import { type WEngineData } from '@/lib/wengines-data'
 
 interface WEngineSectionProps {
   agentId: string | null
-  loadoutId: string | null
+  loadout: Loadout
 }
 
-export function WEngineSection({ agentId, loadoutId }: WEngineSectionProps) {
-  const wEngines = useStore((state) => state.wEngines)
-  const updateAgent = useStore((state) => state.updateAgent)
+export function WEngineSection({ agentId, loadout }: WEngineSectionProps) {
+  const { data: wenginesData, isLoading } = useDb<WEngineData>('wengines', !loadout.wEngine)
+
   // const addWEngine = useStore((state) => state.addWEngine)
   const [showAddDialog, setShowAddDialog] = useState(false)
   
-  const equippedWEngine = wEngines.find((w) => w.id === agent.equippedWEngineId)
+  // const equippedWEngine = wEngines.find((w) => w.id === agent.equippedWEngineId)
 
-  const handleWEngineChange = (wEngineId: string) => {
-    updateAgent(agent.id, { equippedWEngineId: wEngineId === 'none' ? null : wEngineId })
-  }
+  // const handleWEngineChange = (wEngineId: string) => {
+  //   updateAgent(agent.id, { equippedWEngineId: wEngineId === 'none' ? null : wEngineId })
+  // }
 
   // const handleAddWEngine = () => {
   //   const id = addWEngine({
@@ -46,14 +48,14 @@ export function WEngineSection({ agentId, loadoutId }: WEngineSectionProps) {
             className="border-cyan-300/20"
           >
             <Plus className="h-4 w-4 mr-2" />
-            {equippedWEngine ? 'Change W-Engine' : 'Add W-Engine'}
+            {loadout.wEngine ? 'Change W-Engine' : 'Set W-Engine'}
           </Button>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
         {/* W-Engine Selector */}
         {/* <Select
-          value={agent.equippedWEngineId || 'none'}
+          value={loadout.wEngine || 'none'}
           onValueChange={handleWEngineChange}
         >
           <SelectTrigger className="w-full border-cyan-300/20 bg-slate-800/50">
@@ -69,7 +71,7 @@ export function WEngineSection({ agentId, loadoutId }: WEngineSectionProps) {
           </SelectContent>
         </Select> */}
 
-        {equippedWEngine && (
+        {loadout.wEngine && (
           <div className="space-y-4">
             {/* Placeholder for W-Engine image */}
             <div className="aspect-video bg-slate-800/50 border border-cyan-300/20 rounded-md flex items-center justify-center">
@@ -86,10 +88,10 @@ export function WEngineSection({ agentId, loadoutId }: WEngineSectionProps) {
           </div>
         )}
       </CardContent>
-      <AddWEngineDialog
-        open={showAddDialog}
-        onClose={() => setShowAddDialog(false)}
-      />
+
+      {showAddDialog && (
+        <AddWEngineDialog agentId={agentId} loadoutId={loadout.id} onClose={() => setShowAddDialog(false)} />
+      )}
     </Card>
   )
 }

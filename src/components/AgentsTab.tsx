@@ -27,6 +27,7 @@ export function AgentsTab() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="text-cyan-300">Your Agents</CardTitle>
+              {/* Add Agent */}
               <Button
                 onClick={() => setShowAddDialog(true)}
                 size="icon"
