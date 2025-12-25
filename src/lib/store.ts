@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { immer } from 'zustand/middleware/immer'
 import { getAgentData } from './agents-data'
 import { loadAgentsData, type AgentData } from './agents-data'
 import { loadWEnginesData, type WEngineData } from './wengines-data'
@@ -113,10 +114,10 @@ interface AppState {
   setDisc: (agentId: string, loadoutId: string, slot: number, disc: Disc | null) => void
   
   // Buff actions
-  toggleBuff: (agentId: string, buffId: string) => void
-  addCustomBuff: (agentId: string, buff: Omit<Buff, 'id' | 'source'>) => string
-  updateCustomBuff: (agentId: string, buffId: string, updates: Partial<Buff>) => void
-  deleteCustomBuff: (agentId: string, buffId: string) => void
+  toggleBuff: (agentId: string, loadoutId: string, buffId: string) => void
+  addCustomBuff: (agentId: string, loadoutId: string, buff: Omit<Buff, 'id' | 'source'>) => string
+  // updateCustomBuff: (agentId: string, loadoutId: string, buffId: string, updates: Partial<Buff>) => void
+  deleteCustomBuff: (agentId: string, loadoutId: string, buffId: string) => void
   
   // Settings
   setFontPreset: (preset: AppState['fontPreset']) => void
@@ -126,7 +127,7 @@ interface AppState {
   
   // Area actions
   addArea: (area: Omit<Area, 'id'>) => string
-  updateArea: (id: string, updates: Partial<Area>) => void
+  // updateArea: (id: string, updates: Partial<Area>) => void
   
   // Import/Export
   importState: (state: Partial<AppState>) => void
@@ -141,10 +142,9 @@ const generateUniqueId = () => crypto.randomUUID();
 
 export const useStore = create<AppState>()(
   persist(
-    (set, get) => ({
+    immer((set, get) => ({
       db: { agents: null, wengines: null },
       loadingStates: {},
-
       fontPreset: 'inter',
       agents: [],
       areas: [],
@@ -154,12 +154,11 @@ export const useStore = create<AppState>()(
       // #region Database
 
       fetchDb: async (key) => {
-        const { db, loadingStates } = get();
-        if (db[key] || loadingStates[key]) return;
+        if (get().db[key] || get().loadingStates[key]) return;
 
-        set((state) => ({
-          loadingStates: { ...state.loadingStates, [key]: true }
-        }));
+        set((state) => {
+          state.loadingStates[key] = true;
+        });
 
         try {
           console.log(`Testing: Delaying ${key} for 3 seconds...`);
@@ -172,14 +171,14 @@ export const useStore = create<AppState>()(
 
           const data = await loaders[key]();
 
-          set((state) => ({
-            db: { ...state.db, [key]: data },
-            loadingStates: { ...state.loadingStates, [key]: false }
-          }));
+          set((state) => {
+            state.db[key] = data;
+            state.loadingStates[key] = false;
+          });
         } catch (error) {
-          set((state) => ({
-            loadingStates: { ...state.loadingStates, [key]: false }
-          }));
+          set((state) => {
+            state.loadingStates[key] = false;
+          });
         }
       },
 
@@ -188,11 +187,11 @@ export const useStore = create<AppState>()(
       // #region Agent
 
       addAgent: (dataId) => {
-        const agent = getAgentData(dataId)
-        if (!agent) throw new Error(`Agent with ID ${dataId} not found.`)
+        const agentData = getAgentData(dataId);
+        if (!agentData) throw new Error(`Agent with ID ${dataId} not found.`);
 
         const newAgent: Agent = {
-          id: agent.id,
+          id: agentData.id,
           tracking: true,
           currentLoadoutId: 'default',
           loadouts: [
@@ -206,46 +205,47 @@ export const useStore = create<AppState>()(
               customBuffs: [],
             }
           ]
-        }
+        };
 
-        set((state) => ({ agents: [...state.agents, newAgent] }))
-        return dataId
+        set((state) => {
+          state.agents.push(newAgent);
+        });
+        return dataId;
       },
 
       updateAgent: (id, updates) => {
-        set((state) => ({
-          agents: state.agents.map((a) => (a.id === id ? { ...a, ...updates } : a)),
-        }))
+        set((state) => {
+          const agent = state.agents.find(a => a.id === id);
+          if (agent) Object.assign(agent, updates);
+        });
       },
 
       deleteAgent: (id) => {
-        set((state) => ({
-          agents: state.agents.filter((a) => a.id !== id),
-          selectedAgentId: state.selectedAgentId === id ? null : state.selectedAgentId,
-        }))
+        set((state) => {
+          state.agents = state.agents.filter((a) => a.id !== id);
+          if (state.selectedAgentId === id) state.selectedAgentId = null;
+        });
       },
 
-      selectAgent: (id) => {
-        set({ selectedAgentId: id })
-      },
-
+      selectAgent: (id) => set({ selectedAgentId: id }),
       // #endregion
 
       // #region WEngine
 
       updateWEngine: (agentId, loadoutId, wEngine) => {
-        // set((state) => ({ TODO
-        //   agent
-        //   wEngines: state.wEngines.map((w) => (w.id === id ? { ...w, ...updates } : w)),
-        // }))
+        set((state) => {
+          const agent = state.agents.find(a => a.id === agentId);
+          const loadout = agent?.loadouts.find(l => l.id === loadoutId);
+          if (loadout) loadout.wEngine = wEngine;
+        });
       },
 
-      deleteWEngine: (agentId) => {
-        // set((state) => ({ TODO
-        //   agents: state.agents.map((a) => 
-        //     a.equippedWEngineId === id ? { ...a, equippedWEngineId: null } : a
-        //   ),
-        // }))
+      deleteWEngine: (agentId, loadoutId) => {
+        set((state) => {
+          const agent = state.agents.find(a => a.id === agentId);
+          const loadout = agent?.loadouts.find(l => l.id === loadoutId);
+          if (loadout) loadout.wEngine = null;
+        });
       },
 
       // #endregion
@@ -253,184 +253,124 @@ export const useStore = create<AppState>()(
       // #region Loadout
 
       duplicateLoadout: (agentId, loadoutId) => {
-        const agent = get().agents.find((a) => a.id === agentId)
-        if (!agent) throw new Error(`Agent with ID ${agentId} not found.`)
-        const loadout = agent.loadouts.find((l) => l.id === loadoutId)
-        if (!loadout) throw new Error(`Loadout with ID ${loadoutId} not found.`)
-        if (agent.loadouts.length >= 5) throw new Error('Cannot have more than 5 loadouts.')
+        const agent = get().agents.find((a) => a.id === agentId);
+        if (!agent) throw new Error(`Agent with ID ${agentId} not found.`);
+        const loadout = agent.loadouts.find((l) => l.id === loadoutId);
+        if (!loadout) throw new Error(`Loadout with ID ${loadoutId} not found.`);
+        if (agent.loadouts.length >= 5) throw new Error('Max 5 loadouts reached.');
 
-        const id = generateUniqueId()
-        const newLoadout: Loadout = structuredClone(loadout)
-        newLoadout.id = id
-        newLoadout.loadoutName = `Loadout ${agent.loadouts.length + 1}`
+        const newId = generateUniqueId();
+        const clonedLoadout = structuredClone(loadout);
+        clonedLoadout.id = newId;
+        clonedLoadout.loadoutName = `Loadout ${agent.loadouts.length + 1}`;
 
-        set((state) => ({
-          agents: state.agents.map((a) =>
-            a.id === agentId ? { ...a, loadouts: [...a.loadouts, newLoadout] } : a
-          ),
-        }))
-        return id
+        set((state) => {
+          const targetAgent = state.agents.find(a => a.id === agentId);
+          targetAgent?.loadouts.push(clonedLoadout);
+        });
+        return newId;
       },
 
-      // addLoadout: (agentId, loadout) => {
-      //   const id = generateId()
-      //   const newLoadout: Loadout = { id, ...loadout }
-      //   set((state) => ({
-      //     agents: state.agents.map((a) =>
-      //       a.id === agentId ? { ...a, loadouts: [...a.loadouts, newLoadout] } : a
-      //     ),
-      //   }))
-      //   return id
-      // },
-
       updateLoadout: (agentId, loadoutId, updates) => {
-        set((state) => ({
-          agents: state.agents.map((a) =>
-            a.id === agentId
-              ? {
-                  ...a,
-                  loadouts: a.loadouts.map((l) =>
-                    l.id === loadoutId ? { ...l, ...updates } : l
-                  ),
-                }
-              : a
-          ),
-        }))
+        set((state) => {
+          const agent = state.agents.find(a => a.id === agentId);
+          const loadout = agent?.loadouts.find(l => l.id === loadoutId);
+          if (loadout) Object.assign(loadout, updates);
+        });
       },
 
       deleteLoadout: (agentId, loadoutId) => {
-        set((state) => ({
-          agents: state.agents.map((a) => {
-            if (a.id !== agentId) return a
-            const filtered = a.loadouts.filter((l) => l.id !== loadoutId)
-            return {
-              ...a,
-              loadouts: filtered,
-              currentLoadoutId:
-                a.currentLoadoutId === loadoutId
-                  ? filtered[0]?.id
-                  : a.currentLoadoutId,
-            }
-          }),
-        }))
+        set((state) => {
+          const agent = state.agents.find(a => a.id === agentId);
+          if (!agent) return;
+          
+          agent.loadouts = agent.loadouts.filter(l => l.id !== loadoutId);
+          if (agent.currentLoadoutId === loadoutId) {
+            agent.currentLoadoutId = agent.loadouts[0]?.id || '';
+          }
+        });
       },
 
       setCurrentLoadout: (agentId, loadoutId) => {
-        set((state) => ({
-          agents: state.agents.map((a) =>
-            a.id === agentId ? { ...a, currentLoadoutId: loadoutId } : a
-          ),
-        }))
+        set((state) => {
+          const agent = state.agents.find(a => a.id === agentId);
+          if (agent) agent.currentLoadoutId = loadoutId;
+        });
       },
 
       // #endregion
 
+      // #region Disc & Buffs
+
       setDisc: (agentId, loadoutId, slot, disc) => {
-        // set((state) => ({
-        //   agents: state.agents.map((a) =>
-        //     a.id === agentId
-        //       ? {
-        //           ...a,
-        //           loadouts: a.loadouts.map((l) =>
-        //             l.id === loadoutId
-        //               ? {
-        //                   ...l,
-        //                   discs: l.discs.map((d, i) => (i === slot - 1 ? disc : d)),
-        //                 }
-        //               : l
-        //           ),
-        //         }
-        //       : a
-        //   ),
-        // }))
+        set((state) => {
+          const agent = state.agents.find(a => a.id === agentId);
+          const loadout = agent?.loadouts.find(l => l.id === loadoutId);
+          if (loadout) {
+            // slot is 1-indexed based on your type, array is 0-indexed
+            loadout.discs[slot - 1] = disc;
+          }
+        });
       },
 
-      toggleBuff: (agentId, buffId) => {
-        // set((state) => ({
-        //   agents: state.agents.map((a) =>
-        //     a.id === agentId
-        //       ? {
-        //           ...a,
-        //           activeBuffIds: a.activeBuffIds.includes(buffId)
-        //             ? a.activeBuffIds.filter((id) => id !== buffId)
-        //             : [...a.activeBuffIds, buffId],
-        //         }
-        //       : a
-        //   ),
-        // }))
+      toggleBuff: (agentId, loadoutId, buffId) => {
+        set((state) => {
+          const agent = state.agents.find(a => a.id === agentId);
+          const loadout = agent?.loadouts.find(l => l.id === loadoutId);
+          if (!loadout) return;
+
+          const index = loadout.activeBuffIds.indexOf(buffId);
+          if (index > -1) {
+            loadout.activeBuffIds.splice(index, 1);
+          } else {
+            loadout.activeBuffIds.push(buffId);
+          }
+        });
       },
 
-      addCustomBuff: (agentId, buff) => {
-        // const id = generateUniqueId()
-        // const newBuff: Buff = { id, ...buff, source: 'custom', active: false }
-        // set((state) => ({
-        //   agents: state.agents.map((a) =>
-        //     a.id === agentId ? { ...a, customBuffs: [...a.customBuffs, newBuff] } : a
-        //   ),
-        // }))
-        // return id
+      addCustomBuff: (agentId, loadoutId, buff) => {
+        const id = generateUniqueId();
+        set((state) => {
+          const agent = state.agents.find(a => a.id === agentId);
+          const loadout = agent?.loadouts.find(l => l.id === loadoutId);
+          if (loadout) {
+            loadout.customBuffs.push({ ...buff, id, source: 'custom', active: false });
+          }
+        });
+        return id;
       },
 
-      updateCustomBuff: (agentId, buffId, updates) => {
-        // set((state) => ({
-        //   agents: state.agents.map((a) =>
-        //     a.id === agentId
-        //       ? {
-        //           ...a,
-        //           customBuffs: a.customBuffs.map((b) =>
-        //             b.id === buffId ? { ...b, ...updates } : b
-        //           ),
-        //         }
-        //       : a
-        //   ),
-        // }))
+      deleteCustomBuff: (agentId, loadoutId, buffId) => {
+        set((state) => {
+          const agent = state.agents.find(a => a.id === agentId);
+          const loadout = agent?.loadouts.find(l => l.id === loadoutId);
+          if (loadout) {
+            loadout.customBuffs = loadout.customBuffs.filter(b => b.id !== buffId);
+            loadout.activeBuffIds = loadout.activeBuffIds.filter(id => id !== buffId);
+          }
+        });
       },
 
-      deleteCustomBuff: (agentId, buffId) => {
-        // set((state) => ({
-        //   agents: state.agents.map((a) =>
-        //     a.id === agentId
-        //       ? {
-        //           ...a,
-        //           customBuffs: a.customBuffs.filter((b) => b.id !== buffId),
-        //           activeBuffIds: a.activeBuffIds.filter((id) => id !== buffId),
-        //         }
-        //       : a
-        //   ),
-        // }))
-      },
+      // #endregion
 
-      setFontPreset: (preset) => {
-        set({ fontPreset: preset })
-      },
-
-      setStatWeight: (stat, weight) => {
-        set((state) => ({
-          statWeights: { ...state.statWeights, [stat]: weight },
-        }))
-      },
+      setFontPreset: (preset) => set((state) => { state.fontPreset = preset }),
+      
+      setStatWeight: (stat, weight) => set((state) => {
+        state.statWeights[stat] = weight;
+      }),
 
       addArea: (area) => {
-        const id = generateUniqueId()
-        const newArea: Area = { id, ...area }
-        set((state) => ({ areas: [...state.areas, newArea] }))
-        return id
+        const id = generateUniqueId();
+        set((state) => { state.areas.push({ id, ...area }) });
+        return id;
       },
 
-      updateArea: (id, updates) => {
-        set((state) => ({
-          areas: state.areas.map((a) => (a.id === id ? { ...a, ...updates } : a)),
-        }))
-      },
+      importState: (importedState) => set((state) => {
+        Object.assign(state, importedState);
+      }),
 
-      importState: (importedState) => {
-        set((state) => ({ ...state, ...importedState }))
-      },
-
-      exportState: () => {
-        return get()
-      },
-    }),
+      exportState: () => get(),
+    })),
     {
       name: 'zzz-disc-planner-storage',
       partialize: (state) => ({ 
@@ -442,4 +382,4 @@ export const useStore = create<AppState>()(
       })
     }
   )
-)
+);
