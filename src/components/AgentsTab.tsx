@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useStore } from '@/lib/store'
 import { resolveAssetPath } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -16,7 +16,9 @@ export function AgentsTab() {
   const [showAddDialog, setShowAddDialog] = useState(false)
   const { data: agentsData } = useDb<AgentData>('agents', agents.length > 0);
 
-  const selectedAgent = agents.find((a) => a.id === selectedAgentId)
+  const selectedAgent = useMemo(() => 
+    agents.find((a) => a.id === selectedAgentId), 
+  [agents, selectedAgentId]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
@@ -83,7 +85,7 @@ export function AgentsTab() {
       </div>
 
       <div className="lg:col-span-4">
-        {selectedAgent && agentsData?.[selectedAgent.id] ? (
+        {selectedAgent ? (
           <AgentDetail agent={selectedAgent} agentData={agentsData?.[selectedAgent.id]} />
         ) : (
           <Card className="bg-slate-900/50 border-cyan-400/30">

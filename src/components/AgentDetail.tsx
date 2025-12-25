@@ -11,7 +11,8 @@ import { FinalStats } from './FinalStats'
 import { StatWeights } from './StatWeights'
 import { AddWEngineDialog } from './AddWEngineDialog'
 import { X } from 'lucide-react'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import { useDb } from '@/hooks/useDb'
 import { type AgentData } from '@/lib/agents-data'
 
 interface AgentDetailProps {
@@ -63,15 +64,16 @@ export function AgentDetail({ agent, agentData }: AgentDetailProps) {
         <CardHeader>
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold text-cyan-300">{agentData?.name}</h2>
-            {agentData && (
-              <Button
-                onClick={() => handleDeleteAgent(agentData.name)}
-                variant="destructive"
-                size="sm"
-              >
-                Delete Agent
-              </Button>
-            )}
+            <Button
+              variant="destructive"
+              size="sm"
+              // Disable interaction while loading
+              disabled={!agentData}
+              className={!agentData ? "animate-pulse bg-slate-800 border-none text-transparent pointer-events-none" : ""}
+              onClick={() => agentData && handleDeleteAgent(agentData.name)}
+            >
+            Delete Agent
+          </Button>
           </div>
         </CardHeader>
         <CardContent>
@@ -79,23 +81,18 @@ export function AgentDetail({ agent, agentData }: AgentDetailProps) {
             {/* Left side: Agent image and Final Stats */}
             <div className="flex-shrink-0 space-y-4">
               {/* Agent full body image */}
-              {agentData ? (
-                <div className="aspect-[2/3] w-64 bg-slate-800/50 border border-cyan-300/20 rounded-md overflow-hidden flex items-center justify-center">
+              <div className="aspect-[2/3] w-64 bg-slate-800/50 border border-cyan-300/20 rounded-md overflow-hidden flex items-center justify-center">
+                {agentData && (
                   <img
-                    src={resolveAssetPath(agentData.bodyUrl)}
-                    alt={`${agentData.name} full body`}
-                    className="w-full h-full object-contain"
-                    onError={(e) => {
-                      e.currentTarget.parentElement!.innerHTML = '<span class="text-xs text-cyan-300/30">Full Body Placeholder</span>'
-                    }}
-                  />
-                </div>
-              ) : (
-                <div className="aspect-[2/3] w-64 bg-slate-800/50 border border-cyan-300/20 rounded-md flex items-center justify-center">
-                  <span className="text-xs text-cyan-300/30">Full Body Placeholder</span>
-                </div>
-              )}
-              
+                  src={resolveAssetPath(agentData.bodyUrl)}
+                  alt={`${agentData.name} full body`}
+                  className="w-full h-full object-contain"
+                  onError={(e) => {
+                    e.currentTarget.parentElement!.innerHTML = '<span class="text-xs text-cyan-300/30">Full Body Placeholder</span>'
+                  }}
+                />
+                )}
+              </div>              
               {/* Final Stats */}
               <FinalStats stats={stats} />
             </div>
@@ -143,7 +140,7 @@ export function AgentDetail({ agent, agentData }: AgentDetailProps) {
               </div>
 
               {/* W-Engine Section */}
-              {/* <WEngineSection agent={agent} /> */}
+              <WEngineSection agentId={agent.id} loadoutId={agent.currentLoadoutId} />
 
               {/* Disc Drive Section */}
               {currentLoadout && (
@@ -152,7 +149,7 @@ export function AgentDetail({ agent, agentData }: AgentDetailProps) {
                     <CardTitle className="text-cyan-300 text-lg">Disc Drive</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-3 gap-4">
                       {([1, 2, 3, 4, 5, 6] as const).map((slot) => (
                         <DiscSlot
                           key={slot}

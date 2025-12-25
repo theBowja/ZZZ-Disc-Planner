@@ -99,8 +99,8 @@ interface AppState {
   selectAgent: (id: string | null) => void
   
   // W-Engine actions
-  updateWEngine: (id: string, updates: WEngine) => void
-  deleteWEngine: (id: string) => void
+  updateWEngine: (agentId: string, loadoutId: string, wEngine: WEngine | null) => void
+  deleteWEngine: (agentId: string, loadoutId: string) => void
   
   // Loadout actions
   duplicateLoadout: (agentId: string, loadoutId: string) => string
@@ -233,7 +233,7 @@ export const useStore = create<AppState>()(
 
       // #region WEngine
 
-      updateWEngine: (agentId, wEngine) => {
+      updateWEngine: (agentId, loadoutId, wEngine) => {
         // set((state) => ({ TODO
         //   agent
         //   wEngines: state.wEngines.map((w) => (w.id === id ? { ...w, ...updates } : w)),

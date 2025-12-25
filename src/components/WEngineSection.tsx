@@ -8,10 +8,11 @@ import { AddWEngineDialog } from './AddWEngineDialog'
 import { useState } from 'react'
 
 interface WEngineSectionProps {
-  agent: Agent
+  agentId: string | null
+  loadoutId: string | null
 }
 
-export function WEngineSection({ agent }: WEngineSectionProps) {
+export function WEngineSection({ agentId, loadoutId }: WEngineSectionProps) {
   const wEngines = useStore((state) => state.wEngines)
   const updateAgent = useStore((state) => state.updateAgent)
   // const addWEngine = useStore((state) => state.addWEngine)
