@@ -35,12 +35,12 @@ export function BuffsSection({ loadout, allBuffs }: BuffsSectionProps) {
   const [newBuffValue, setNewBuffValue] = useState('')
 
   const handleToggleBuff = (buffId: string) => {
-    toggleBuff(loadout.id, buffId)
+    toggleBuff("agent.id", loadout.id, buffId)
   }
 
   const handleAddCustomBuff = () => {
     if (!newBuffLabel.trim()) return
-    addCustomBuff(loadout.id, {
+    addCustomBuff("agent.id", loadout.id, {
       label: newBuffLabel,
       stats: [{ stat: newBuffStat, value: parseFloat(newBuffValue) || 0 }],
       active: false,
@@ -51,7 +51,7 @@ export function BuffsSection({ loadout, allBuffs }: BuffsSectionProps) {
   }
 
   const handleDeleteCustomBuff = (buffId: string) => {
-    deleteCustomBuff(loadout.id, buffId)
+    deleteCustomBuff("agent.id", loadout.id, buffId)
   }
 
   // Group buffs by source

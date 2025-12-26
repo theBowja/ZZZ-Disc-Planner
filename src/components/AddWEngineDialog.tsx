@@ -19,7 +19,7 @@ interface AddWEngineDialogProps {
 export function AddWEngineDialog({ agentId, loadoutId, onClose }: AddWEngineDialogProps) {
   // 1. Store Actions/State
   const updateWEngine = useStore((state) => state.updateWEngine)
-  const deleteWEngine = useStore((state) => state.deleteWEngine)
+  // const deleteWEngine = useStore((state) => state.deleteWEngine)
   
   // 2. Database Hooks
   const { dataList: wEnginesDataList, isLoading: loadingWEngines } = useDb<WEngineData>('wengines')

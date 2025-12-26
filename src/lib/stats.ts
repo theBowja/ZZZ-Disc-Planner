@@ -1,4 +1,5 @@
-import { type Agent, type Buff, type WEngine, type Disc } from './store'
+// import { getAllAgentsData } from './agents-data'
+import { type Agent, type Buff, type Disc } from './store'
 
 export interface StatContributor {
   source: string
@@ -18,6 +19,8 @@ export function calculateAgentStats(
   allBuffs: Buff[]
 ): CalculatedStats {
   const stats: CalculatedStats = {}
+  agent
+  allBuffs
   
   // // Initialize with base stats
   // agent.baseStats.forEach((stat) => {
@@ -100,6 +103,7 @@ export function calculateAgentStats(
 
 export function getAllBuffsForAgent(agent: Agent): Buff[] {
   const buffs: Buff[] = []
+  agent
   
   // // Add custom buffs
   // buffs.push(...agent.customBuffs)

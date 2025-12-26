@@ -131,7 +131,8 @@ export function AreaPatrolTab() {
                             key={agent.id}
                             className="text-xs text-cyan-300/70"
                           >
-                            • {agent.name}
+                            TODO
+                            {/* • {agent.name} */}
                           </div>
                         ))}
                       </div>

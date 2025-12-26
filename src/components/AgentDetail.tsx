@@ -9,7 +9,7 @@ import { WEngineSection } from './WEngineSection'
 // import { BuffsSection } from './BuffsSection'
 import { FinalStats } from './FinalStats'
 import { StatWeights } from './StatWeights'
-import { useMemo, useState } from 'react'
+// import { useMemo, useState } from 'react'
 import { type AgentData } from '@/lib/agents-data'
 
 interface AgentDetailProps {
@@ -141,7 +141,7 @@ export function AgentDetail({ agent, agentData }: AgentDetailProps) {
               </div>
 
               {/* W-Engine Section */}
-              <WEngineSection agentId={agent.id} loadoutId={agent.currentLoadoutId} wEngine={currentLoadout.wEngine} />
+              <WEngineSection agentId={agent.id} loadoutId={agent.currentLoadoutId} wEngine={currentLoadout ? currentLoadout.wEngine : null} />
 
               {/* Disc Drive Section */}
               {currentLoadout && (

@@ -9,7 +9,6 @@ const STAT_NAMES: StatName[] = [
   'Crit Rate',
   'Crit DMG',
   'Anomaly Proficiency',
-  'PEN',
 ]
 
 export function StatWeights() {

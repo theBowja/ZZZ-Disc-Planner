@@ -1,7 +1,7 @@
 import { useStore } from "@/lib/store"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Input } from "@/components/ui/input"
+// import { Input } from "@/components/ui/input"
 
 const FONT_OPTIONS = [
   { value: "inter", label: "Inter (Sans, Default)" },
