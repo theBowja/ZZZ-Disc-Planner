@@ -67,28 +67,16 @@ export function WEngineSection({ agentId, loadoutId, wEngine }: WEngineSectionPr
             </div>
 
             {/* RIGHT: Details, Description, and Stats */}
-            <div className="flex-1 space-y-4 min-w-0">
-              <div>
-                <h3 className="text-lg font-bold text-cyan-100 truncate">
-                  {details?.name || 'Loading...'}
-                </h3>
-                <div className="text-sm text-cyan-300/70 leading-relaxed mt-1 line-clamp-3">
-                  {isApiLoading || !talent ? (
-                    'Loading description...'
-                  ) : (
-                    <p>
-                      <span className="font-bold text-cyan-100/90">{talent.Name}: </span>
-                      <ColoredText text={talent.Desc} />
-                    </p>
-                  )}
-                </div>
-              </div>
+            <div className="flex-1 min-w-0">
+              <h3 className="text-lg font-bold text-cyan-100 truncate">
+                {details?.name || 'Loading...'}
+              </h3>
 
               {/* Stats Section */}
-              <div className="pt-2 border-t border-cyan-300/10">
+              <div className="pb-2 border-b border-cyan-300/10">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <span className="text-[10px] uppercase tracking-wider text-cyan-300/40 font-bold">Base ATK</span>
+                    <span className="text-[10px] uppercase tracking-wider text-cyan-300/40 font-bold">Base ATK (Lv. 60)</span>
                     <p className="text-sm font-mono text-cyan-100">48</p>
                   </div>
                   <div className="space-y-1">
@@ -97,6 +85,20 @@ export function WEngineSection({ agentId, loadoutId, wEngine }: WEngineSectionPr
                   </div>
                 </div>
               </div>
+
+
+              <div className="text-sm text-cyan-300/70 leading-relaxed mt-1">
+                {isApiLoading || !talent ? (
+                  'Loading description...'
+                ) : (
+                  <p>
+                    <span className="font-bold text-cyan-100/90">{talent.Name}: </span>
+                    <ColoredText text={talent.Desc} />
+                  </p>
+                )}
+              </div>
+
+
             </div>
           </div>
         ) : (
