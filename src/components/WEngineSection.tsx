@@ -10,6 +10,7 @@ import { useDb } from '@/hooks/useDb'
 import { type WEngineData } from '@/lib/wengines-data'
 import { resolveAssetPath } from '@/lib/utils'
 import useApi from '@/hooks/useApi'
+import ColoredText from './ui/ColoredText'
 
 interface WEngineSectionProps {
   agentId: string
@@ -19,9 +20,9 @@ interface WEngineSectionProps {
 
 export function WEngineSection({ agentId, loadoutId, wEngine }: WEngineSectionProps) {
   // Database Hooks
-  const { data: wEnginesData, isLoading } = useDb<WEngineData>('wengines', wEngine !== null)
+  const { data: wEnginesData } = useDb<WEngineData>('wengines', wEngine !== null)
   const [showAddDialog, setShowAddDialog] = useState(false)
-  const { data: apiData, isLoading: isApiLoading } = useApi<any>('weapon', wEngine?.id)
+  const { data: apiData, isLoading: isApiLoading } = useApi('weapon', wEngine?.id)
 
   // Retrieve current W-Engine details from fetched data list
   const details = useMemo(() => {
@@ -29,8 +30,8 @@ export function WEngineSection({ agentId, loadoutId, wEngine }: WEngineSectionPr
     return wEnginesData[wEngine.id]
   }, [wEnginesData, wEngine])
 
-  const talentDescription =
-    apiData && wEngine?.overclock ? apiData.Talents?.[wEngine.overclock.toString()] : null
+  const talent =
+    apiData && wEngine?.overclock ? apiData.Talents[wEngine.overclock] : null
 
   return (
     <Card className="bg-slate-900/50 border-cyan-300/20">
@@ -71,11 +72,16 @@ export function WEngineSection({ agentId, loadoutId, wEngine }: WEngineSectionPr
                 <h3 className="text-lg font-bold text-cyan-100 truncate">
                   {details?.name || 'Loading...'}
                 </h3>
-                <p className="text-sm text-cyan-300/70 leading-relaxed mt-1 line-clamp-3">
-                  {isApiLoading
-                    ? 'Loading description...'
-                    : talentDescription || 'Description not available.'}
-                </p>
+                <div className="text-sm text-cyan-300/70 leading-relaxed mt-1 line-clamp-3">
+                  {isApiLoading || !talent ? (
+                    'Loading description...'
+                  ) : (
+                    <p>
+                      <span className="font-bold text-cyan-100/90">{talent.Name}: </span>
+                      <ColoredText text={talent.Desc} />
+                    </p>
+                  )}
+                </div>
               </div>
 
               {/* Stats Section */}
@@ -106,3 +112,4 @@ export function WEngineSection({ agentId, loadoutId, wEngine }: WEngineSectionPr
     </Card>
   )
 }
+
