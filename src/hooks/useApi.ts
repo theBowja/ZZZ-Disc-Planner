@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 const BASE_URL = 'https://api.hakush.in/zzz/data';
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
+const CACHE_DURATION = 10 * 60 * 1000; // 10 minutes in milliseconds
 const cache: Record<string, { data: any; timestamp: number }> = {};
 
 export type ApiResource = 'weapons' | 'characters' | 'weapon' | 'character';
@@ -14,6 +14,13 @@ export type AgentListApiResponse = {
 }
 
 export type WEngineApiResponse = {
+  BaseProperty: {
+    Value: number;
+  };
+  RandProperty: {
+    Name: string;
+    Value: number;
+  };
   Talents: {
     [K in '1' | '2' | '3' | '4' | '5']: {
       Name: string;
@@ -35,12 +42,29 @@ export type WEngineListApiResponse = {
   }
 }
 
-export function useApi(resource: 'character', id: string | null | undefined): { data: AgentApiResponse | undefined, isLoading: boolean, error: any };
-export function useApi(resource: 'characters'): { data: AgentListApiResponse | undefined, isLoading: boolean, error: any };
-export function useApi(resource: 'weapon', id: string | null | undefined): { data: WEngineApiResponse | undefined, isLoading: boolean, error: any };
-export function useApi(resource: 'weapons'): { data: WEngineListApiResponse | undefined, isLoading: boolean, error: any };
+export type RelicListApiResponse = {
+  [key: string]: {
+    icon: string
+    EN: {
+      name: string
+      desc2: string
+      desc4: string
+    }
+  }
+}
 
-export default function useApi(resource: ApiResource, id: string | null | undefined = undefined) {
+type ResourceMap = {
+  'character': AgentApiResponse;
+  'characters': AgentListApiResponse;
+  'weapon': WEngineApiResponse;
+  'weapons': WEngineListApiResponse;
+  'relics': RelicListApiResponse;
+};
+
+export default function useApi<K extends keyof ResourceMap>(
+  resource: K, 
+  id?: string | null
+): { data: ResourceMap[K] | undefined, isLoading: boolean, error: any } {
   const [data, setData] = useState<any>();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<unknown>();
@@ -51,12 +75,14 @@ export default function useApi(resource: ApiResource, id: string | null | undefi
         if (!id) return null;
         return `${BASE_URL}/en/character/${id}.json`;
       case 'characters':
-        return `${BASE_URL}/en/character.json`;
+        return `${BASE_URL}/character.json`;
       case 'weapon':
         if (!id) return null;
         return `${BASE_URL}/en/weapon/${id}.json`;
       case 'weapons':
-        return `${BASE_URL}/en/weapon.json`;
+        return `${BASE_URL}/weapon.json`;
+      case 'relics':
+        return `${BASE_URL}/equipment.json`;
       default:
         throw new Error(`Unknown resource: ${resource}`);
     }

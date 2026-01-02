@@ -1,5 +1,5 @@
 import { useStore, type Agent } from '@/lib/store'
-import { calculateAgentStats, getAllBuffsForAgent } from '@/lib/stats'
+import { getAllBuffsForAgent } from '@/lib/stats'
 import { resolveAssetPath } from '@/lib/utils'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -26,7 +26,7 @@ export function AgentDetail({ agent, agentData }: AgentDetailProps) {
   // const [showAddDialog, setShowAddDialog] = useState(false)
   
   const allBuffs = getAllBuffsForAgent(agent)
-  const stats = calculateAgentStats(agent, allBuffs)
+  // const stats = calculateAgentStats(agent, allBuffs)
   
   const currentLoadout = agent.loadouts.find((l) => l.id === agent.currentLoadoutId)
   // const currentLoadout = useMemo(() => {
@@ -95,7 +95,7 @@ export function AgentDetail({ agent, agentData }: AgentDetailProps) {
               </div>
 
               {/* Final Stats */}
-              <FinalStats stats={stats} />
+              {/* <FinalStats stats={stats} /> */}
             </div>
 
             {/* Right side: Editable fields */}

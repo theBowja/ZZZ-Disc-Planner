@@ -76,9 +76,9 @@ export function DiscSlot({ agent, loadout, slot }: DiscSlotProps) {
 
   return (
     <Card className="bg-slate-800/50 border-cyan-300/20">
-      <CardContent className="p-4">
+      <CardContent>
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium text-cyan-300">Slot {slot}</span>
+          <h4 className="text-sm font-medium text-cyan-300">Slot {slot}</h4>
           {disc && (
             <Button
               onClick={handleRemoveDisc}

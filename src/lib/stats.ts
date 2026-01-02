@@ -101,6 +101,14 @@ export function calculateAgentStats(
   return stats
 }
 
+export function calculateWeaponMaxBaseStat(baseAttack: number) {
+  return Math.round(baseAttack * (1 + 94090 / 10000 + 0.8922 * 5) * 100) / 100
+}
+
+export function calculateWeaponMaxSecondaryStat(baseValue: number) {
+  return baseValue * (1 + 0.3 * 5)
+}
+
 export function getAllBuffsForAgent(agent: Agent): Buff[] {
   const buffs: Buff[] = []
   agent
