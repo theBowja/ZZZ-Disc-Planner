@@ -22,12 +22,13 @@ export function AgentsTab() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-      <div className="lg:col-span-1">
-        <Card className="bg-slate-900/50 border-cyan-400/30">
-          <CardHeader>
+
+      {/* Agent Sidebar */}
+      <div className="lg:col-span-1 lg:sticky lg:top-6 lg:h-[calc(100vh-3rem)] flex flex-col">
+        <Card className="bg-slate-900/50 border-cyan-400/30 flex flex-col h-full overflow-hidden">
+          <CardHeader className="flex-shrink-0">
             <div className="flex items-center justify-between">
               <CardTitle className="text-cyan-300">Your Agents</CardTitle>
-              {/* Add Agent */}
               <Button
                 onClick={() => setShowAddDialog(true)}
                 size="icon"
@@ -38,7 +39,8 @@ export function AgentsTab() {
               </Button>
             </div>
           </CardHeader>
-          <CardContent>
+
+          <CardContent className="flex-1 overflow-y-auto scrollbar-thin scrollbar-track-slate-900/50 scrollbar-thumb-cyan-400/50 pb-6">
             <div className="space-y-2">
               {agents.length === 0 ? (
                 <p className="text-sm text-cyan-400/60 text-center py-8">
