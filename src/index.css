@@ -116,11 +116,31 @@
 }
 
 @layer base {
+  /* 1. Global Reset */
   * {
     @apply border-border outline-ring/50;
+    box-sizing: border-box;
   }
+
+  /* 2. Force the body and root to fill the screen and stay still */
+  html, body, #root {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevents the 'double scrollbar' glitch */
+  }
+
   body {
     @apply bg-slate-950 text-cyan-300;
     font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* 3. Ensure the root is a flex container */
+  #root {
+    display: flex;
+    flex-direction: column;
   }
 }
