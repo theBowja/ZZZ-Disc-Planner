@@ -68,7 +68,7 @@ function App() {
 
           {/* Scrollable Viewport */}
           <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
-            <div className="max-w-6xl mx-auto h-full">
+            <div className="max-w-8xl mx-auto h-full">
               <TabsContent value="agents" className="m-0 focus-visible:outline-none">
                 <ContentHeader title="Agent Database" description="Manage your proxy builds and disc sets." />
                 <AgentsTab />
