@@ -1,5 +1,5 @@
 import { useStore, type Agent } from '@/lib/store'
-import { getAllBuffsForAgent } from '@/lib/stats'
+// import { getAllBuffsForAgent } from '@/lib/stats'
 import { resolveAssetPath } from '@/lib/utils'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { DiscSlot } from './DiscSlot'
 import { WEngineSection } from './WEngineSection'
 // import { BuffsSection } from './BuffsSection'
-import { FinalStats } from './FinalStats'
+// import { FinalStats } from './FinalStats'
 import { StatWeights } from './StatWeights'
 // import { useMemo, useState } from 'react'
 import { type AgentData } from '@/lib/agents-data'
@@ -25,7 +25,7 @@ export function AgentDetail({ agent, agentData }: AgentDetailProps) {
   const deleteLoadout = useStore((state) => state.deleteLoadout)
   // const [showAddDialog, setShowAddDialog] = useState(false)
   
-  const allBuffs = getAllBuffsForAgent(agent)
+  // const allBuffs = getAllBuffsForAgent(agent)
   // const stats = calculateAgentStats(agent, allBuffs)
   
   const currentLoadout = agent.loadouts.find((l) => l.id === agent.currentLoadoutId)

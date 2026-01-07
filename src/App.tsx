@@ -56,10 +56,8 @@ function App() {
 
           {/* Sidebar Footer */}
           <div className="p-4 mt-auto border-t border-cyan-500/10">
-            <div className="bg-cyan-500/5 rounded-lg p-3 border border-cyan-500/10">
-              <p className="text-xs text-cyan-400/70 font-medium">System Status</p>
-              <p className="text-[10px] text-slate-400">Optimization Engine Active</p>
-            </div>
+            <p className="text-xs text-cyan-400/70 font-medium">System Status</p>
+            <p className="text-[10px] text-slate-400">Optimization Engine Active</p>
           </div>
         </aside>
 
